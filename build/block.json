@@ -1,0 +1,130 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "b-blocks/advance-slider",
+  "version": "1.0.0",
+  "title": "Advance Slider",
+  "category": "widgets",
+  "description": "Short description of the Advance Slider",
+  "keywords": [
+    "advance slider",
+    "advance",
+    "slider"
+  ],
+  "textdomain": "b-blocks",
+  "attributes": {
+    "sliders": {
+      "type": "array",
+      "default": [
+        {
+          "heading": "Hello World",
+          "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
+          "background": {
+            "color": "rgba(0, 0, 255, 1)",
+            "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
+            "image": {
+              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+            },
+            "type": "solid",
+            "repeat": "no-repeat",
+            "size": "cover",
+            "position": "center",
+            "overlayColor": "",
+            "attachment": "scroll"
+          },
+          "button": {
+            "label": "visit",
+            "url": "#"
+          }
+        },
+        {
+          "heading": "Hello World",
+          "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
+          "background": {
+            "color": "rgba(0, 0, 255, 1)",
+            "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
+            "image": {
+              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+            },
+            "type": "solid",
+            "repeat": "no-repeat",
+            "size": "cover",
+            "position": "center",
+            "overlayColor": "",
+            "attachment": "scroll"
+          },
+          "button": {
+            "label": "visit",
+            "url": "#"
+          }
+        },
+        {
+          "heading": "Hello World",
+          "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
+          "background": {
+            "color": "rgba(0, 0, 255, 1)",
+            "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
+            "image": {
+              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+            },
+            "type": "solid",
+            "repeat": "no-repeat",
+            "size": "cover",
+            "position": "center",
+            "overlayColor": "",
+            "attachment": "scroll"
+          },
+          "button": {
+            "label": "visit",
+            "url": "#"
+          }
+        }
+      ]
+    },
+    "styles": {
+      "type": "object",
+      "default": {
+        "header": {
+          "color": "#fff",
+          "size": "26px"
+        },
+        "description": {
+          "color": "#fff",
+          "size": "16px"
+        },
+        "button": {
+          "color": "#fff",
+          "bgColor": "#00ff00",
+          "hovColor": "#00ff00",
+          "hovBgColor": "#ff0000"
+        },
+        "overlay": {
+          "isEnabled": false
+        }
+      }
+    },
+    "options": {
+      "type": "object",
+      "default": {}
+    },
+    "align": {
+      "type": "string",
+      "default": "wide"
+    }
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false
+  },
+  "example": {
+    "attributes": {}
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./view.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

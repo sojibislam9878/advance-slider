@@ -1,0 +1,75 @@
+$primaryColor: #4527a4;
+
+.bBlocksInspectorInfo {
+	padding: 6px;
+
+	a {
+		text-decoration: none;
+		font-weight: 700;
+	}
+}
+
+.wp-block-b-blocks-advance-slider{
+	.selectHelp{
+		color: #616063;
+	}
+}
+
+.btn{
+	margin-top: 6px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 4px 4px;
+}
+
+.delete{
+	border: 1px solid red;
+	border-radius: 4px;
+	background-color:white;
+	color: red;
+	transition-duration: 500ms;
+	width: 100%;
+}
+
+.delete:hover{
+	color:white;
+	background-color: red;
+	transition-duration: 500ms;
+	cursor: pointer;
+}
+.duplicate{
+	border: 1px solid rgb(34, 104, 255);
+	border-radius: 4px;
+	background-color:white;
+	color: rgb(34, 104, 255);
+	transition-duration: 500ms;
+	width: 100%;
+}
+
+.duplicate:hover{
+	color:white;
+	background-color: rgb(34, 104, 255);
+	transition-duration: 500ms;
+	cursor: pointer;
+}
+.add{
+	border: 1px solid #006BA1;
+	border-radius: 4px;
+	background-color:#006BA1;
+	color: rgba(255, 255, 255, 0.822);
+	font-size: 14px;
+	padding: 8px;
+	transition-duration: 500ms;
+	width: 95%;
+	align-items: center;
+	text-align: center;
+	margin: 6px;
+}
+
+.add:hover{
+	color:white;
+	background-color: #04547c;
+	transition-duration: 500ms;
+	cursor: pointer;
+}
