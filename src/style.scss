@@ -4,7 +4,7 @@ $primaryColor: #4527a4;
 	.slider{
 		.mySwiper{
 				width: 60%;
-				height: 400px;
+				min-height: 400px;
 			  
 			  .swiper-slide {
 				text-align: center;
@@ -15,6 +15,13 @@ $primaryColor: #4527a4;
 				// display: flex;
 				// justify-content: center;
 				// align-items: center;
+				.button{
+					padding: 4px 16px;
+					color: white;
+					background-color: rgb(100, 100, 252);
+					border-radius: 6px;
+					font-size: medium;
+				}
 			  }
 			  
 			  .swiper-slide img {

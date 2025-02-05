@@ -25,90 +25,161 @@
             "repeat": "no-repeat",
             "size": "cover",
             "position": "center",
-			"overlayColor": "",
+            "overlayColor": "",
             "attachment": "scroll"
           },
-		  "button":{
-			"label":"visit",
-			"url":"#"
-		  }
+          "button": {
+            "label": "visit",
+            "url": "#"
+          }
         },
         {
-			"heading": "Hello World",
-			"description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
-			"background": {
-			  "color": "rgba(0, 0, 255, 1)",
-			  "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
-			  "image": {
-				"url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
-			  },
-			  "type": "solid",
-			  "repeat": "no-repeat",
-			  "size": "cover",
-			  "position": "center",
-			  "overlayColor": "",
-			  "attachment": "scroll"
-			},
-			"button":{
-			  "label":"visit",
-			  "url":"#"
-			}
-		  },
-		  {
-			"heading": "Hello World",
-			"description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
-			"background": {
-			  "color": "rgba(0, 0, 255, 1)",
-			  "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
-			  "image": {
-				"url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
-			  },
-			  "type": "solid",
-			  "repeat": "no-repeat",
-			  "size": "cover",
-			  "position": "center",
-			  "overlayColor": "",
-			  "attachment": "scroll"
-			},
-			"button":{
-			  "label":"visit",
-			  "url":"#"
-			}
-		  }
+          "heading": "Hello World",
+          "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
+          "background": {
+            "color": "rgba(0, 0, 255, 1)",
+            "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
+            "image": {
+              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+            },
+            "type": "solid",
+            "repeat": "no-repeat",
+            "size": "cover",
+            "position": "center",
+            "overlayColor": "",
+            "attachment": "scroll"
+          },
+          "button": {
+            "label": "visit",
+            "url": "#"
+          }
+        },
+        {
+          "heading": "Hello World",
+          "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
+          "background": {
+            "color": "rgba(0, 0, 255, 1)",
+            "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
+            "image": {
+              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+            },
+            "type": "solid",
+            "repeat": "no-repeat",
+            "size": "cover",
+            "position": "center",
+            "overlayColor": "",
+            "attachment": "scroll"
+          },
+          "button": {
+            "label": "visit",
+            "url": "#"
+          }
+        }
       ]
     },
-	"styles":{
-		"type":"object",
-		"default":{
-			"header":{
-				"color":"#fff",
-				"size":"26px"
-			},
-			"description":{
-				"color":"#fff",
-				"size":"16px"
-			},
-			"button":{
-				"color":"#fff",
-				"bgColor":"#00ff00",
-				"hovColor":"#00ff00",
-				"hovBgColor":"#ff0000"
-			},
-			"overlay":{
-				"isEnabled":false
+    "styles": {
+      "type": "object",
+      "default": {
+        "header": {
+          "color": "#fff",
+          "size": "26px"
+        },
+        "description": {
+          "color": "#fff",
+          "size": "16px"
+        },
+        "button": {
+          "color": "#fff",
+          "bgColor": "#00ff00",
+          "hovColor": "#00ff00",
+          "hovBgColor": "#ff0000"
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "default": {
+        "height": {
+          "desktop": "350px",
+          "tablet": "350px",
+          "mobile": "300px"
+        },
+        "width": {
+          "desktop": "80%",
+          "tablet": "350px",
+          "mobile": "300px"
+        },
+        "borderRadius": {
+          "top": "10px",
+          "left": "10px",
+          "right": "10px",
+          "bottom": "10px"
+        },
+        "border": {
+          "width": "1px",
+          "color": "#0000ff",
+          "style": "solid"
+        },
+        "padding": {
+          "desktop": {
+            "top": "10px",
+            "left": "10px",
+            "right": "10px",
+            "bottom": "10px"
+          },
+          "tablet": {
+            "top": "10px",
+            "left": "10px",
+            "right": "10px",
+            "bottom": "10px"
+          },
+          "mobile": {
+            "top": "10px",
+            "left": "10px",
+            "right": "10px",
+            "bottom": "10px"
+          }
+        },
+        "margin": {
+          "desktop": {
+            "top": "10px",
+            "left": "10px",
+            "right": "10px",
+            "bottom": "10px"
+          },
+          "tablet": {
+            "top": "10px",
+            "left": "10px",
+            "right": "10px",
+            "bottom": "10px"
+          },
+          "mobile": {
+            "top": "10px",
+            "left": "10px",
+            "right": "10px",
+            "bottom": "10px"
+          }
+        }, 
+		"shadow":[
+			{
+			  "blur": "5px",
+			  "hOffset": "5px",
+			  "vOffset": "5px",
+			  "spreed": "5px",
+			  "color": "#aaa",
+			  "inInset": false
 			}
-		}
-	},
-	"options":{
-		"type":"object",
-		"default":{
-
-		}
-	},
-	"align":{
-		"type":"string",
-		"default":"wide"
-	}
+		  ]
+      }
+    },
+    "options": {
+      "type": "object",
+      "default": {}
+    },
+    "align": {
+      "type": "string",
+      "default": "wide"
+    }
   },
   "supports": {
     "align": ["wide", "full"],

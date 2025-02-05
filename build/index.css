@@ -61,7 +61,7 @@
   font-size: 14px;
   padding: 8px;
   transition-duration: 500ms;
-  width: 95%;
+  width: 100%;
   align-items: center;
   text-align: center;
   margin: 6px;
@@ -72,6 +72,10 @@
   background-color: #04547c;
   transition-duration: 500ms;
   cursor: pointer;
+}
+
+.components-grid {
+  margin-top: 10px;
 }
 /*!*********************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!../bpl-tools/Components/style.scss ***!

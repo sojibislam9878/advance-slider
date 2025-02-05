@@ -4,19 +4,28 @@ import {
   PanelBody,
   // SelectControl,
   __experimentalInputControl as InputControl,
+  __experimentalUnitControl as UnitControl,
   TextareaControl,
   Flex,
+  PanelRow,
+  __experimentalBorderControl as  BorderControl,
+  __experimentalBoxControl as  BoxC,
 } from "@wordpress/components";
 // import { purposeTypeOptions } from '../../../../utils/options';
 // import { updateData } from '../../../../utils/functions';
-import { Background, OverlayControl } from "../../../../../../bpl-tools/Components";
+import {
+  Background,
+  BoxControl,
+  Device,
+  Label,
+  ShadowControl,
+} from "../../../../../../bpl-tools/Components";
 // import Sortable from "../../../../../../bpl-tools/Components/ItemsPanel/Sortable";
 import { updateData } from "../../../../utils/functions";
 import { deleteIcon, duplicateIcon } from "../../../../utils/icons";
 
-
-const General = ({ attributes, setAttributes }) => {
-  const { sliders } = attributes;
+const General = ({ attributes, setAttributes, device }) => {
+  const { sliders, layout } = attributes;
 
   const handleAdd = () => {
     const defaultSlide = {
@@ -46,23 +55,93 @@ const General = ({ attributes, setAttributes }) => {
   };
 
   const handleDuplicate = (index) => {
-
     const slideToDuplicate = { ...sliders[index] };
     const updatedSlides = [...sliders];
     updatedSlides.splice(index + 1, 0, slideToDuplicate);
     setAttributes({ sliders: updatedSlides });
   };
 
-  const handleDelete =(index)=>{
+  const handleDelete = (index) => {
     const updatedSliders = sliders.filter((_, indx) => indx !== index);
     setAttributes({ sliders: updatedSliders });
-  }
+  };
 
-  // const over= {
-  //   isEnabled:true,
-  // }
   return (
     <>
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Layout Setting", "b-blocks")}
+        initialOpen={false}
+      >
+        <PanelRow>
+          <Label>Height</Label>
+          <Device />
+        </PanelRow>
+        <UnitControl
+          value={layout.height[device]}
+          onChange={(value) =>
+            setAttributes({
+              layout: updateData(layout, value, "height", device),
+            })
+          }
+        />
+        <PanelRow>
+        <Label>Height</Label>
+        <Device/>
+      </PanelRow>
+        <UnitControl
+          value={layout.width[device]}
+          onChange={(value) =>
+            setAttributes({
+              layout: updateData(layout, value, "width", device),
+            })
+          }
+        />
+          <PanelRow>
+          <Label>Padding</Label>
+          <Device />
+        </PanelRow>
+        <BoxControl
+          // className="mt5"
+          // label={__("Padding", "b-blocks")}
+          values={layout.padding[device]}
+          onChange={(value) =>
+            setAttributes({ layout: updateData(layout, value, "padding", device)  })
+          }
+        />
+        <PanelRow>
+          <Label>Margin</Label>
+          <Device />
+        </PanelRow>
+        <BoxControl
+          // className="mt5"
+          // label={__("Margin", "b-blocks")}
+          values={layout.margin[device]}
+          onChange={(value) =>
+            setAttributes({ layout: updateData(layout, value, "margin", device) })
+          }
+        />
+        <BoxC
+          className="mt5"
+          label={__("Border Radius", "b-blocks")}
+          values={layout.borderRadius}
+          onChange={(value) =>
+            setAttributes({ layout: updateData(layout, value, "borderRadius") })
+          }
+        />
+
+        <BorderControl
+        className="mt5"
+          label={__("Border")}
+          onChange={(value)=>console.log(value)}
+          value={layout.border}
+        />
+
+        <ShadowControl
+        value={layout.shadow}
+        onChange={(value)=>setAttributes({layout:updateData(layout, value, "shadow")})}
+        />
+      </PanelBody>
       <PanelBody
         className="bPlPanelBody"
         title={__("Slides", "b-blocks")}
@@ -70,7 +149,6 @@ const General = ({ attributes, setAttributes }) => {
       >
         {sliders.map((slider, index) => {
           const { background, heading, description, button } = slider;
-          console.log(background);
 
           return (
             <PanelBody
@@ -81,14 +159,22 @@ const General = ({ attributes, setAttributes }) => {
               <InputControl
                 label={__("Heading", "b-blocks")}
                 value={heading}
-                onChange={(value)=>setAttributes({sliders:updateData(sliders, value, index, "heading")})}
+                onChange={(value) =>
+                  setAttributes({
+                    sliders: updateData(sliders, value, index, "heading"),
+                  })
+                }
               />
 
               <TextareaControl
                 className="mt5"
                 label={__("Description", "b-blocks")}
                 value={description}
-                onChange={(value)=>setAttributes({sliders:updateData(sliders, value, index, "description")})}
+                onChange={(value) =>
+                  setAttributes({
+                    sliders: updateData(sliders, value, index, "description"),
+                  })
+                }
               />
               <Background
                 value={background}
@@ -105,35 +191,51 @@ const General = ({ attributes, setAttributes }) => {
                 className="mt5"
                 label={__("Button Label", "b-blocks")}
                 value={button.label}
-                onChange={(val) => {
-                  const newSliders = [...sliders];
-                  const updatedSlider = { ...newSliders[index], heading: val };
-                  newSliders[index] = updatedSlider;
-                  setAttributes({ sliders: newSliders });
+                onChange={(value) => {
+                  setAttributes({
+                    sliders: updateData(
+                      sliders,
+                      value,
+                      index,
+                      "button",
+                      "label"
+                    ),
+                  });
                 }}
               />
               <InputControl
                 className="mt5"
                 label={__("Button URL", "b-blocks")}
                 value={button.url}
-                onChange={(val) => {
-                  const newSliders = [...sliders];
-                  const updatedSlider = { ...newSliders[index], heading: val };
-                  newSliders[index] = updatedSlider;
-                  setAttributes({ sliders: newSliders });
+                onChange={(value) => {
+                  setAttributes({
+                    sliders: updateData(sliders, value, index, "button", "url"),
+                  });
                 }}
               />
               <Flex>
-                <button className="btn duplicate" onClick={()=>handleDuplicate(index)}>
+                <button
+                  className="btn duplicate"
+                  onClick={() => handleDuplicate(index)}
+                >
                   {duplicateIcon} Duplicate
                 </button>
-                <button onClick={()=>{handleDelete(index)}} className="btn delete">{deleteIcon} Delete</button>
+                <button
+                  onClick={() => {
+                    handleDelete(index);
+                  }}
+                  className="btn delete"
+                >
+                  {deleteIcon} Delete
+                </button>
               </Flex>
             </PanelBody>
           );
         })}
+        <button onClick={handleAdd} className="btn add">
+          Add
+        </button>
       </PanelBody>
-      <button onClick={handleAdd} className="btn add">Add</button>
     </>
   );
 };

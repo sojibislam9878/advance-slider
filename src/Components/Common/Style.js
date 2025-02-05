@@ -1,7 +1,7 @@
 import { getBackgroundCSS } from "../../../../bpl-tools/utils/getCSS";
 
-const Style = ({ attributes, id }) => {
-  console.log(attributes);
+const Style = ({ id }) => {
+  // console.log(attributes);
   
   const bg = {
     color: "rgba(0, 0, 255, 1)",

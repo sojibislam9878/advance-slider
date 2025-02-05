@@ -3,23 +3,21 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { RichText } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 
-// import required modules
 import { Navigation } from "swiper/modules";
 import { updateData } from "../../utils/functions";
 
-const Slider = ({ attributes, setAttributes }) => {
+const Slider = ({ attributes, setAttributes, from }) => {
   const { sliders } = attributes || [];
-  console.log(sliders);
-  const from = "server"
   return (
     <div className="slider">
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
         {sliders?.map((slider, index) => {
-          const {heading, description} = slider
+          const {heading, description, button} = slider
+          // console.log(button.url);
+          
           return(
             <SwiperSlide key={index}>
               {
@@ -42,6 +40,9 @@ const Slider = ({ attributes, setAttributes }) => {
             <p>{description}</p>
               </>
               }
+              <a href={button.url} target="_blank" rel="noreferrer">
+              <button className="button">{button.label}</button>
+              </a>
           </SwiperSlide>
           )
         })}
