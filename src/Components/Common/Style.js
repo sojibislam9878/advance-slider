@@ -1,22 +1,9 @@
 import { getBackgroundCSS, getBoxCSS, getMultiShadowCSS} from "../../../../bpl-tools/utils/getCSS";
 
 const Style = ({attributes, id }) => {
- const {layout}= attributes
+ const {sliders, layout}= attributes
+
  
-  
-  const bg = {
-    color: "rgba(0, 0, 255, 1)",
-    gradient: "linear-gradient(135deg, #4527a4, #8344c5)",
-    image: {
-      url: "https://i.ibb.co.com/4fck8Cv/8.jpg",
-    },
-    type: "image",
-    repeat: "no-repeat",
-    size: "cover",
-    position: "center",
-    overlayColor:"",
-    attachment: "scroll",
-  };
   const mainSl = `#${id}`;
   const blockSl = `${mainSl} .slider`;
   const sliderBodySl = `${blockSl} .mySwiper`;
@@ -28,13 +15,25 @@ const Style = ({attributes, id }) => {
   // border-bottom-right-radius:${layout.borderRadius.bottom}  ;
   // border-bottom-left-radius: ${layout.borderRadius.left} ;
 
+  const slidesBg =sliders?.map((slider, index)=>{
+    const {background}=slider;
+    console.log(index);
+    
+    return`
+     ${sliderBodySl} .swiper-slide-${index}{
+      ${getBackgroundCSS(background)}
+     }
+    `
+  }).join("\n");
+
   return (
     <style
       dangerouslySetInnerHTML={{
         __html: `
+        ${slidesBg}
 		
 		${sliderBodySl} {
-			${getBackgroundCSS(bg)}
+			
        border: ${layout.border.width} ${layout.border.style} ${layout.border.color};
        min-height: ${layout.height.desktop};
        max-width: ${layout.width.desktop};

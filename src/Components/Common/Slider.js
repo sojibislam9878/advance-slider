@@ -36,7 +36,7 @@ const Slider = ({ attributes, setAttributes, from }) => {
           // console.log(button.url);
           
           return(
-            <SwiperSlide key={index}>
+            <SwiperSlide className={`swiper-slide swiper-slide-${index}`} key={index}>
               <div className="content">
               {
                 from==="server"?<>

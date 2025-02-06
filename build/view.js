@@ -72,6 +72,7 @@ const Slider = ({
     // console.log(button.url);
 
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_3__.SwiperSlide, {
+      className: `swiper-slide swiper-slide-${index}`,
       key: index
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "content"
@@ -122,21 +123,9 @@ const Style = ({
   id
 }) => {
   const {
+    sliders,
     layout
   } = attributes;
-  const bg = {
-    color: "rgba(0, 0, 255, 1)",
-    gradient: "linear-gradient(135deg, #4527a4, #8344c5)",
-    image: {
-      url: "https://i.ibb.co.com/4fck8Cv/8.jpg"
-    },
-    type: "image",
-    repeat: "no-repeat",
-    size: "cover",
-    position: "center",
-    overlayColor: "",
-    attachment: "scroll"
-  };
   const mainSl = `#${id}`;
   const blockSl = `${mainSl} .slider`;
   const sliderBodySl = `${blockSl} .mySwiper`;
@@ -148,12 +137,24 @@ const Style = ({
   // border-bottom-right-radius:${layout.borderRadius.bottom}  ;
   // border-bottom-left-radius: ${layout.borderRadius.left} ;
 
+  const slidesBg = sliders?.map((slider, index) => {
+    const {
+      background
+    } = slider;
+    console.log(index);
+    return `
+     ${sliderBodySl} .swiper-slide-${index}{
+      ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBackgroundCSS)(background)}
+     }
+    `;
+  }).join("\n");
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
     dangerouslySetInnerHTML: {
       __html: `
+        ${slidesBg}
 		
 		${sliderBodySl} {
-			${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBackgroundCSS)(bg)}
+			
        border: ${layout.border.width} ${layout.border.style} ${layout.border.color};
        min-height: ${layout.height.desktop};
        max-width: ${layout.width.desktop};
