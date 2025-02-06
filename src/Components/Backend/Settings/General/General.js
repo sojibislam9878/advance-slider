@@ -8,8 +8,10 @@ import {
   TextareaControl,
   Flex,
   PanelRow,
-  __experimentalBorderControl as  BorderControl,
-  __experimentalBoxControl as  BoxC,
+  __experimentalBorderControl as BorderControl,
+  __experimentalBoxControl as BoxC,
+  FormToggle,
+  __experimentalNumberControl as NumberControl,
 } from "@wordpress/components";
 // import { purposeTypeOptions } from '../../../../utils/options';
 // import { updateData } from '../../../../utils/functions';
@@ -17,6 +19,7 @@ import {
   Background,
   BoxControl,
   Device,
+  IconLibrary,
   Label,
   ShadowControl,
 } from "../../../../../../bpl-tools/Components";
@@ -25,7 +28,9 @@ import { updateData } from "../../../../utils/functions";
 import { deleteIcon, duplicateIcon } from "../../../../utils/icons";
 
 const General = ({ attributes, setAttributes, device }) => {
-  const { sliders, layout } = attributes;
+  const { sliders, layout, options } = attributes;
+
+  const { autoPlay, navigationBtn , loop} = options || {};
 
   const handleAdd = () => {
     const defaultSlide = {
@@ -65,9 +70,13 @@ const General = ({ attributes, setAttributes, device }) => {
     const updatedSliders = sliders.filter((_, indx) => indx !== index);
     setAttributes({ sliders: updatedSliders });
   };
+console.log(navigationBtn.icon);
 
   return (
     <>
+
+      {/* Layout Setting Section */}
+
       <PanelBody
         className="bPlPanelBody"
         title={__("Layout Setting", "b-blocks")}
@@ -86,9 +95,9 @@ const General = ({ attributes, setAttributes, device }) => {
           }
         />
         <PanelRow>
-        <Label className="">Width</Label>
-        <Device/>
-      </PanelRow>
+          <Label className="">Width</Label>
+          <Device />
+        </PanelRow>
         <UnitControl
           value={layout.width[device]}
           onChange={(value) =>
@@ -97,7 +106,7 @@ const General = ({ attributes, setAttributes, device }) => {
             })
           }
         />
-          <PanelRow>
+        <PanelRow>
           <Label className="">Padding</Label>
           <Device />
         </PanelRow>
@@ -106,7 +115,9 @@ const General = ({ attributes, setAttributes, device }) => {
           // label={__("Padding", "b-blocks")}
           values={layout.padding[device]}
           onChange={(value) =>
-            setAttributes({ layout: updateData(layout, value, "padding", device)  })
+            setAttributes({
+              layout: updateData(layout, value, "padding", device),
+            })
           }
         />
         <PanelRow>
@@ -118,7 +129,9 @@ const General = ({ attributes, setAttributes, device }) => {
           // label={__("Margin", "b-blocks")}
           values={layout.margin[device]}
           onChange={(value) =>
-            setAttributes({ layout: updateData(layout, value, "margin", device) })
+            setAttributes({
+              layout: updateData(layout, value, "margin", device),
+            })
           }
         />
         <BoxC
@@ -131,17 +144,24 @@ const General = ({ attributes, setAttributes, device }) => {
         />
 
         <BorderControl
-        className="mt5"
+          className="mt5"
           label={__("Border")}
-          onChange={(value)=>setAttributes({layout:updateData(layout, value, "border")})}
+          onChange={(value) =>
+            setAttributes({ layout: updateData(layout, value, "border") })
+          }
           value={layout.border}
         />
 
         <ShadowControl
-        value={layout.shadow}
-        onChange={(value)=>setAttributes({layout:updateData(layout, value, "shadow")})}
+          value={layout.shadow}
+          onChange={(value) =>
+            setAttributes({ layout: updateData(layout, value, "shadow") })
+          }
         />
       </PanelBody>
+
+          {/* Slides Section */}
+
       <PanelBody
         className="bPlPanelBody"
         title={__("Slides", "b-blocks")}
@@ -235,6 +255,106 @@ const General = ({ attributes, setAttributes, device }) => {
         <button onClick={handleAdd} className="btn add">
           Add
         </button>
+      </PanelBody>
+
+        {/* Option section  */}
+
+      <PanelBody
+        className="bPlPanelBody"
+        title={__("Options", "b-blocks")}
+        initialOpen={false}
+      >
+        <Flex justify="start" align="center" gap={2}>
+              <FormToggle
+                checked={navigationBtn.status}
+                onChange={() =>
+                  setAttributes({
+                    options: updateData(
+                      options,
+                      !navigationBtn.status,
+                      "navigationBtn",
+                      "status"
+                    ),
+                  })
+                }
+              />
+              <p className="mt10">Navigation Button</p>
+            </Flex>
+            {
+            navigationBtn.status && (
+            <>
+            <IconLibrary label={__("Select an icon", "b-blocks")} onChange={(value)=>{
+              setAttributes({options:updateData(options, value, "navigationBtn", "icon")})
+            }
+            }/>
+            </>)
+          }
+        <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={autoPlay.isAutoPlay}
+            onChange={() =>
+              setAttributes({
+                options: updateData(
+                  options,
+                  !autoPlay.isAutoPlay,
+                  "autoPlay",
+                  "isAutoPlay"
+                ),
+              })
+            }
+          />
+          <p className="mt10">Auto Play</p>
+        </Flex>
+        {autoPlay?.isAutoPlay && (
+          <>
+            <NumberControl
+              label={__("Auto Play Delay (ms)", "b-blocks")}
+              isShiftStepEnabled={true}
+              onChange={(value) => {
+                setAttributes({
+                  options: updateData(options, value, "autoPlay", "delay"),
+                });
+              }}
+              shiftStep={2}
+              step={500}
+              value={autoPlay.delay}
+            />
+
+            <Flex justify="start" align="center" gap={2}>
+              <FormToggle
+                checked={autoPlay.disableOnInteraction}
+                onChange={() =>
+                  setAttributes({
+                    options: updateData(
+                      options,
+                      !autoPlay.disableOnInteraction,
+                      "autoPlay",
+                      "disableOnInteraction"
+                    ),
+                  })
+                }
+              />
+              <p className="mt10">Disable Auto Play On Interaction</p>
+            </Flex>
+          </>
+        )}
+        {
+          !autoPlay.isAutoPlay && <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={loop}
+            onChange={() =>
+              setAttributes({
+                options: updateData(
+                  options,
+                  !loop,
+                  "loop",
+                ),
+              })
+            }
+          />
+          <p className="mt10">Slide Loop</p>
+        </Flex>
+        }
       </PanelBody>
     </>
   );

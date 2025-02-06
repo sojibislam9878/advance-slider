@@ -17,7 +17,7 @@ const Style = ({attributes, id }) => {
 
   const slidesBg =sliders?.map((slider, index)=>{
     const {background}=slider;
-    console.log(index);
+    // console.log(index);
     
     return`
      ${sliderBodySl} .swiper-slide-${index}{

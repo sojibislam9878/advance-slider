@@ -8,35 +8,48 @@ import "swiper/css/navigation";
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-import { Navigation, Pagination, Scrollbar } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar, Autoplay } from "swiper/modules";
 import { updateData } from "../../utils/functions";
 
 
 
 const Slider = ({ attributes, setAttributes, from }) => {
-  const { sliders } = attributes || [];
-  
-  
+  const { sliders, options } = attributes || [];
+  const{autoPlay, navigationBtn, loop}=options || {}
+  const { isAutoPlay, delay, disableOnInteraction } = autoPlay;
+  const autoPlayConfig = isAutoPlay
+  ? {
+    delay,
+    disableOnInteraction,
+    }
+  : "";
+const {status, icon}=navigationBtn
+
   return (
     <div className="slider">
       <Swiper 
       onSwiper={(swiper) => {
-        const nextBtn = swiper.navigation.nextEl;
-        if (nextBtn) {
-          nextBtn.innerHTML = ""; // Clear existing content
-          nextBtn.innerHTML = `
-            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11.293 17.293L12.707 18.707 19.414 12 12.707 5.293 11.293 6.707 15.586 11 6 11 6 13 15.586 13z"></path>
-            </svg>
-          `; // Add new SVG content
-      
-          // Remove Swiper pseudo-elements using CSS
-          nextBtn.classList.add("custom-swiper-btn");
+        if (icon) {
+          // Update previous button
+          const prevBtn = swiper.navigation.prevEl;
+          if (prevBtn) {
+            prevBtn.innerHTML =  `${icon}`;
+            prevBtn.classList.add("custom-swiper-btn");
+          }
+
+          // Update next button
+          const nextBtn = swiper.navigation.nextEl;
+          if (nextBtn) {
+            nextBtn.innerHTML = `${icon}`;
+            nextBtn.classList.add("custom-swiper-btn");
+          }
         }
       }}
+      key={`${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}`}
+      autoplay={autoPlayConfig}
       simulateTouch={true}
-      rewind={true}
-      navigation={true} 
+      // rewind={true}
+      navigation={status} 
       spaceBetween={30}
       scrollbar={{
         hide: false,
@@ -46,9 +59,9 @@ const Slider = ({ attributes, setAttributes, from }) => {
         clickable: true,
         dynamicBullets: true,
       }}
-      loop={true}
+      loop={loop}
       direction={'vertical'}
-      modules={[Navigation, Pagination , Scrollbar]} 
+      modules={[Navigation, Pagination , Scrollbar, Autoplay]} 
       className="mySwiper">
         {sliders?.map((slider, index) => {
           const {heading, description, button} = slider

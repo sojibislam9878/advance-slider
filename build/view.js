@@ -43,28 +43,53 @@ const Slider = ({
   from
 }) => {
   const {
-    sliders
+    sliders,
+    options
   } = attributes || [];
+  const {
+    autoPlay,
+    navigationBtn,
+    loop
+  } = options || {};
+  const {
+    isAutoPlay,
+    delay,
+    disableOnInteraction
+  } = autoPlay;
+  const autoPlayConfig = isAutoPlay ? {
+    delay,
+    disableOnInteraction
+  } : "";
+  const {
+    status,
+    icon
+  } = navigationBtn;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "slider"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_3__.Swiper, {
     onSwiper: swiper => {
-      const nextBtn = swiper.navigation.nextEl;
-      if (nextBtn) {
-        nextBtn.innerHTML = ""; // Clear existing content
-        nextBtn.innerHTML = `
-            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11.293 17.293L12.707 18.707 19.414 12 12.707 5.293 11.293 6.707 15.586 11 6 11 6 13 15.586 13z"></path>
-            </svg>
-          `; // Add new SVG content
+      if (icon) {
+        // Update previous button
+        const prevBtn = swiper.navigation.prevEl;
+        if (prevBtn) {
+          prevBtn.innerHTML = `${icon}`;
+          prevBtn.classList.add("custom-swiper-btn");
+        }
 
-        // Remove Swiper pseudo-elements using CSS
-        nextBtn.classList.add("custom-swiper-btn");
+        // Update next button
+        const nextBtn = swiper.navigation.nextEl;
+        if (nextBtn) {
+          nextBtn.innerHTML = `${icon}`;
+          nextBtn.classList.add("custom-swiper-btn");
+        }
       }
     },
-    simulateTouch: true,
-    rewind: true,
-    navigation: true,
+    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}`,
+    autoplay: autoPlayConfig,
+    simulateTouch: true
+    // rewind={true}
+    ,
+    navigation: status,
     spaceBetween: 30,
     scrollbar: {
       hide: false
@@ -74,9 +99,9 @@ const Slider = ({
       clickable: true,
       dynamicBullets: true
     },
-    loop: true,
+    loop: loop,
     direction: 'vertical',
-    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Scrollbar],
+    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Scrollbar, swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Autoplay],
     className: "mySwiper"
   }, sliders?.map((slider, index) => {
     const {
@@ -156,7 +181,8 @@ const Style = ({
     const {
       background
     } = slider;
-    console.log(index);
+    // console.log(index);
+
     return `
      ${sliderBodySl} .swiper-slide-${index}{
       ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBackgroundCSS)(background)}
