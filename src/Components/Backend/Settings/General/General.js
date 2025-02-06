@@ -74,7 +74,7 @@ const General = ({ attributes, setAttributes, device }) => {
         initialOpen={false}
       >
         <PanelRow>
-          <Label>Height</Label>
+          <Label className="">Height</Label>
           <Device />
         </PanelRow>
         <UnitControl
@@ -86,7 +86,7 @@ const General = ({ attributes, setAttributes, device }) => {
           }
         />
         <PanelRow>
-        <Label>Height</Label>
+        <Label className="">Width</Label>
         <Device/>
       </PanelRow>
         <UnitControl
@@ -98,7 +98,7 @@ const General = ({ attributes, setAttributes, device }) => {
           }
         />
           <PanelRow>
-          <Label>Padding</Label>
+          <Label className="">Padding</Label>
           <Device />
         </PanelRow>
         <BoxControl
@@ -110,7 +110,7 @@ const General = ({ attributes, setAttributes, device }) => {
           }
         />
         <PanelRow>
-          <Label>Margin</Label>
+          <Label className="">Margin</Label>
           <Device />
         </PanelRow>
         <BoxControl
@@ -133,7 +133,7 @@ const General = ({ attributes, setAttributes, device }) => {
         <BorderControl
         className="mt5"
           label={__("Border")}
-          onChange={(value)=>console.log(value)}
+          onChange={(value)=>setAttributes({layout:updateData(layout, value, "border")})}
           value={layout.border}
         />
 

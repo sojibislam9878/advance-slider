@@ -3,9 +3,11 @@ $primaryColor: #4527a4;
 .wp-block-b-blocks-advance-slider {
 	.slider{
 		.mySwiper{
-				width: 60%;
+				// width: 60%;
 				min-height: 400px;
-			  
+				// border-radius: 20px;
+				// margin-top:150px ;
+				
 			  .swiper-slide {
 				text-align: center;
 				font-size: 18px;
@@ -15,12 +17,15 @@ $primaryColor: #4527a4;
 				// display: flex;
 				// justify-content: center;
 				// align-items: center;
-				.button{
-					padding: 4px 16px;
-					color: white;
-					background-color: rgb(100, 100, 252);
-					border-radius: 6px;
-					font-size: medium;
+				.content{
+
+					.button{
+						padding: 4px 16px;
+						color: white;
+						background-color: rgb(100, 100, 252);
+						border-radius: 6px;
+						font-size: medium;
+					}
 				}
 			  }
 			  

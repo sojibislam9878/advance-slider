@@ -100,10 +100,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Style = ({
+  attributes,
   id
 }) => {
-  // console.log(attributes);
-
+  const {
+    layout
+  } = attributes;
   const bg = {
     color: "rgba(0, 0, 255, 1)",
     gradient: "linear-gradient(135deg, #4527a4, #8344c5)",
@@ -120,14 +122,59 @@ const Style = ({
   const mainSl = `#${id}`;
   const blockSl = `${mainSl} .slider`;
   const sliderBodySl = `${blockSl} .mySwiper`;
+  const slideSl = `${sliderBodySl}  .swiper-slide`;
+  const contentSl = `${slideSl} .content`;
+
+  // border-top-left-radius:${layout.borderRadius.top} ;
+  // border-top-right-radius:${layout.borderRadius.right}  ;
+  // border-bottom-right-radius:${layout.borderRadius.bottom}  ;
+  // border-bottom-left-radius: ${layout.borderRadius.left} ;
+
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
     dangerouslySetInnerHTML: {
       __html: `
 		
 		${sliderBodySl} {
 			${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBackgroundCSS)(bg)}
-				border: 1px solid red;
+       border: ${layout.border.width} ${layout.border.style} ${layout.border.color};
+       min-height: ${layout.height.desktop};
+       max-width: ${layout.width.desktop};
+       border-radius:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.borderRadius)};
+       margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.margin.desktop)};
+       box-shadow: ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getMultiShadowCSS)(layout.shadow)};
+       
 		}
+
+    ${contentSl}{
+    margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.padding.desktop)}
+    }
+
+    @media  (min-width:641px) and (max-width: 1024px){
+        ${sliderBodySl}{
+        min-height: ${layout.height.tablet};
+        max-width: ${layout.width.tablet};
+        margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.margin.tablet)}
+        }
+
+        ${contentSl}{
+          margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.padding.tablet)}
+          }
+    }
+
+    @media (max-width: 480px){
+      ${sliderBodySl}{
+        min-height: ${layout.height.mobile};
+        max-width: ${layout.width.mobile};
+        margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.margin.mobile)}
+        }
+
+        ${contentSl}{
+          margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.padding.mobile)}
+          }
+    }
+
+
+
 
 	`
     }

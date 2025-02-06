@@ -109,9 +109,9 @@
           "mobile": "300px"
         },
         "width": {
-          "desktop": "80%",
-          "tablet": "350px",
-          "mobile": "300px"
+          "desktop": "60%",
+          "tablet": "80%",
+          "mobile": "100%"
         },
         "borderRadius": {
           "top": "10px",
@@ -164,16 +164,7 @@
             "bottom": "10px"
           }
         },
-        "shadow": [
-          {
-            "blur": "5px",
-            "hOffset": "5px",
-            "vOffset": "5px",
-            "spreed": "5px",
-            "color": "#aaa",
-            "inInset": false
-          }
-        ]
+        "shadow": []
       }
     },
     "options": {
