@@ -4,7 +4,7 @@ $primaryColor: #4527a4;
 	.slider{
 		.mySwiper{
 				// width: 60%;
-				height: 400px;
+				// height: 400px;
 				// border-radius: 20px;
 				// margin-top:150px ;
 				
@@ -61,3 +61,13 @@ $primaryColor: #4527a4;
 // 	height: 100%;
 // 	object-fit: cover;
 //   }
+.swiper-button-next{
+	color: red !important;
+	padding: 12px;
+}
+
+.custom-swiper-btn::before,
+.custom-swiper-btn::after {
+  display: none !important;
+  content: "" !important;
+}

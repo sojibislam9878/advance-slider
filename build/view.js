@@ -48,6 +48,21 @@ const Slider = ({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "slider"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_3__.Swiper, {
+    onSwiper: swiper => {
+      const nextBtn = swiper.navigation.nextEl;
+      if (nextBtn) {
+        nextBtn.innerHTML = ""; // Clear existing content
+        nextBtn.innerHTML = `
+            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.293 17.293L12.707 18.707 19.414 12 12.707 5.293 11.293 6.707 15.586 11 6 11 6 13 15.586 13z"></path>
+            </svg>
+          `; // Add new SVG content
+
+        // Remove Swiper pseudo-elements using CSS
+        nextBtn.classList.add("custom-swiper-btn");
+      }
+    },
+    simulateTouch: true,
     rewind: true,
     navigation: true,
     spaceBetween: 30,
@@ -156,7 +171,7 @@ const Style = ({
 		${sliderBodySl} {
 			
        border: ${layout.border.width} ${layout.border.style} ${layout.border.color};
-       min-height: ${layout.height.desktop};
+       height: ${layout.height.desktop};
        max-width: ${layout.width.desktop};
        border-radius:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.borderRadius)};
        margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.margin.desktop)};

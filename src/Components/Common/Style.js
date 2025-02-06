@@ -3,7 +3,7 @@ import { getBackgroundCSS, getBoxCSS, getMultiShadowCSS} from "../../../../bpl-t
 const Style = ({attributes, id }) => {
  const {sliders, layout}= attributes
 
- 
+
   const mainSl = `#${id}`;
   const blockSl = `${mainSl} .slider`;
   const sliderBodySl = `${blockSl} .mySwiper`;
@@ -35,7 +35,7 @@ const Style = ({attributes, id }) => {
 		${sliderBodySl} {
 			
        border: ${layout.border.width} ${layout.border.style} ${layout.border.color};
-       min-height: ${layout.height.desktop};
+       height: ${layout.height.desktop};
        max-width: ${layout.width.desktop};
        border-radius:${getBoxCSS(layout.borderRadius)};
        margin:${getBoxCSS(layout.margin.desktop)};

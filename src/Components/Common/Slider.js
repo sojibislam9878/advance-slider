@@ -11,11 +11,30 @@ import 'swiper/css/scrollbar';
 import { Navigation, Pagination, Scrollbar } from "swiper/modules";
 import { updateData } from "../../utils/functions";
 
+
+
 const Slider = ({ attributes, setAttributes, from }) => {
   const { sliders } = attributes || [];
+  
+  
   return (
     <div className="slider">
       <Swiper 
+      onSwiper={(swiper) => {
+        const nextBtn = swiper.navigation.nextEl;
+        if (nextBtn) {
+          nextBtn.innerHTML = ""; // Clear existing content
+          nextBtn.innerHTML = `
+            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.293 17.293L12.707 18.707 19.414 12 12.707 5.293 11.293 6.707 15.586 11 6 11 6 13 15.586 13z"></path>
+            </svg>
+          `; // Add new SVG content
+      
+          // Remove Swiper pseudo-elements using CSS
+          nextBtn.classList.add("custom-swiper-btn");
+        }
+      }}
+      simulateTouch={true}
       rewind={true}
       navigation={true} 
       spaceBetween={30}
