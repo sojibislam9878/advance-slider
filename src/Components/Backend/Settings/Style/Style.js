@@ -1,36 +1,62 @@
-import { useState } from "react";
 import { __ } from "@wordpress/i18n";
 import {
   PanelBody,
-  __experimentalBoxControl as BoxControl,
+  // __experimentalBoxControl as BoxControl,
 } from "@wordpress/components";
-import { ColorsControl } from "../../../../../../bpl-tools/Components";
+import { BButtonGroup, ColorControl, Typography} from "../../../../../../bpl-tools/Components";
+import { updateData } from "../../../../utils/functions";
 
 const Style = ({ attributes, setAttributes }) => {
-  const { colors } = attributes;
-  const [values, setValues] = useState({
-    top: "50px",
-    left: "10px",
-    right: "10px",
-    bottom: "50px",
-  });
-
-
+  const { styles } = attributes;
+  const {textAlign, header, description}=styles
+  
 
   return (
     <>
-      <PanelBody
       
+      <PanelBody
         className="bPlPanelBody"
-        title={__("Purpose styles title", "b-blocks")}
-        initialOpen={false}
+        title={__("Slider Styles", "b-blocks")}
+        initialOpen={true}
       >
-        <ColorsControl
+        {/* <ColorsControl
           value={colors}
           onChange={(val) => setAttributes({ colors: val })}
           defaults={{ color: "black", bg: "#B1C5A4" }}
         />
-        <BoxControl values={values} onChange={setValues} />
+        <BoxControl values={values} onChange={setValues} /> */}
+        <BButtonGroup
+        options={[
+          { label: "Left", value: "left" },
+          { label: "Center", value: "center" },
+          { label: "Right", value: "right" },
+        ]}
+        value={textAlign}
+        onChange={(value) => {
+          setAttributes({ styles:updateData(styles, value, "textAlign") });
+        }}
+        label="Text Align"
+      />
+      <PanelBody
+      className="bPlPanelBody"
+      title={__("Header", "b-blocks")}
+      initialOpen={false}
+      >
+        <ColorControl value={header.color} onChange={(value)=>setAttributes({styles:updateData(styles, value, "header", "color")})}/>
+
+        <Typography value={header.typo} onChange={(value)=>setAttributes({styles:updateData(styles, value, "header", "typo")})}/>
+
+      </PanelBody>
+      <PanelBody
+      className="bPlPanelBody"
+      title={__("Description", "b-blocks")}
+      initialOpen={false}
+      >
+        <ColorControl value={description.color} onChange={(value)=>setAttributes({styles:updateData(styles, value, "description", "color")})}/>
+
+        <Typography value={description.typo} onChange={(value)=>setAttributes({styles:updateData(styles, value, "description", "typo")})}/>
+
+      </PanelBody>
       </PanelBody>
     </>
   );

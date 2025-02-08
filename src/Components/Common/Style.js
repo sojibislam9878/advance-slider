@@ -1,13 +1,20 @@
-import { getBackgroundCSS, getBoxCSS, getMultiShadowCSS} from "../../../../bpl-tools/utils/getCSS";
+import { getBackgroundCSS, getBoxCSS, getMultiShadowCSS, getTypoCSS} from "../../../../bpl-tools/utils/getCSS";
 
 const Style = ({attributes, id }) => {
- const {sliders, layout}= attributes
+ const {sliders, layout, options, styles}= attributes
+const {header, description}=styles
+
+console.log(options.navigationBtn.color)
 
 
   const mainSl = `#${id}`;
   const blockSl = `${mainSl} .slider`;
   const sliderBodySl = `${blockSl} .mySwiper`;
+  const prevBtnSl = `${sliderBodySl} .swiper-button-prev`;
+  const nextBtnSl = `${sliderBodySl} .swiper-button-next`;
   const slideSl = `${sliderBodySl}  .swiper-slide`;
+  const headerSl = `${slideSl} .header`
+  const descriptionSl = `${slideSl} .description`
   const contentSl = `${slideSl} .content`;
   
   // border-top-left-radius:${layout.borderRadius.top} ;
@@ -30,6 +37,11 @@ const Style = ({attributes, id }) => {
     <style
       dangerouslySetInnerHTML={{
         __html: `
+        ${getTypoCSS('', header.typo)?.googleFontLink}
+        ${getTypoCSS('', description.typo)?.googleFontLink}
+        ${getTypoCSS(headerSl, header.typo)?.styles}
+        ${getTypoCSS(descriptionSl, description.typo)?.styles}
+		
         ${slidesBg}
 		
 		${sliderBodySl} {
@@ -44,7 +56,20 @@ const Style = ({attributes, id }) => {
 		}
 
     ${contentSl}{
-    margin:${getBoxCSS(layout.padding.desktop)}
+    margin:${getBoxCSS(layout.padding.desktop)};
+    text-align:${styles.textAlign};
+    }
+
+
+    ${prevBtnSl}, ${nextBtnSl}{
+    fill: ${options.navigationBtn.color};
+    }
+
+    ${headerSl}{
+    color:${header.color};
+    }
+    ${descriptionSl}{
+    color:${description.color};
     }
 
     @media  (min-width:641px) and (max-width: 1024px){

@@ -12,12 +12,14 @@ import {
   __experimentalBoxControl as BoxC,
   FormToggle,
   __experimentalNumberControl as NumberControl,
+  SelectControl,
 } from "@wordpress/components";
 // import { purposeTypeOptions } from '../../../../utils/options';
 // import { updateData } from '../../../../utils/functions';
 import {
   Background,
   BoxControl,
+  ColorControl,
   Device,
   IconLibrary,
   Label,
@@ -26,11 +28,22 @@ import {
 // import Sortable from "../../../../../../bpl-tools/Components/ItemsPanel/Sortable";
 import { updateData } from "../../../../utils/functions";
 import { deleteIcon, duplicateIcon } from "../../../../utils/icons";
+import {animationDurationOptions, animationType } from "../../../../utils/options";
 
 const General = ({ attributes, setAttributes, device }) => {
   const { sliders, layout, options } = attributes;
 
-  const { autoPlay, navigationBtn , loop} = options || {};
+  const {
+    autoPlay,
+    navigationBtn,
+    loop,
+    scrollBar,
+    simulateTouch,
+    keyboardControl,
+    mouseWheel,
+    textAnimation, 
+    animationDuration
+  } = options || {};
 
   const handleAdd = () => {
     const defaultSlide = {
@@ -70,11 +83,10 @@ const General = ({ attributes, setAttributes, device }) => {
     const updatedSliders = sliders.filter((_, indx) => indx !== index);
     setAttributes({ sliders: updatedSliders });
   };
-console.log(navigationBtn.icon);
+  console.log(navigationBtn.icon);
 
   return (
     <>
-
       {/* Layout Setting Section */}
 
       <PanelBody
@@ -160,15 +172,16 @@ console.log(navigationBtn.icon);
         />
       </PanelBody>
 
-          {/* Slides Section */}
+      {/* Slides Section */}
 
       <PanelBody
         className="bPlPanelBody"
         title={__("Slides", "b-blocks")}
         initialOpen={false}
       >
-        {sliders.map((slider, index) => {
-          const { background, heading, description, button } = slider;
+        {sliders?.map((slider, index) => {
+          const { background, heading, description, button = {} } = slider;
+          console.log(button?.isButton);
 
           return (
             <PanelBody
@@ -204,35 +217,62 @@ console.log(navigationBtn.icon);
                   });
                 }}
               />
-              {/* <OverlayControl value={over} onChange={(value)=>console.log(value)
-              }/> */}
+              <Flex justify="start" align="center" gap={2}>
+                <FormToggle
+                  checked={button?.isButton}
+                  onChange={
+                    () =>
+                      setAttributes({
+                        sliders: updateData(
+                          sliders,
+                          !button.isButton,
+                          index,
+                          "button",
+                          "isButton"
+                        ),
+                      })
+                    // console.log(button.isBtn)
+                  }
+                />
+                <p className="mt10">Show Button</p>
+              </Flex>
 
-              <InputControl
-                className="mt5"
-                label={__("Button Label", "b-blocks")}
-                value={button.label}
-                onChange={(value) => {
-                  setAttributes({
-                    sliders: updateData(
-                      sliders,
-                      value,
-                      index,
-                      "button",
-                      "label"
-                    ),
-                  });
-                }}
-              />
-              <InputControl
-                className="mt5"
-                label={__("Button URL", "b-blocks")}
-                value={button.url}
-                onChange={(value) => {
-                  setAttributes({
-                    sliders: updateData(sliders, value, index, "button", "url"),
-                  });
-                }}
-              />
+              {button.isButton && (
+                <>
+                  <InputControl
+                    className="mt5"
+                    label={__("Button Label", "b-blocks")}
+                    value={button.label}
+                    onChange={(value) => {
+                      setAttributes({
+                        sliders: updateData(
+                          sliders,
+                          value,
+                          index,
+                          "button",
+                          "label"
+                        ),
+                      });
+                    }}
+                  />
+                  <InputControl
+                    className="mt5"
+                    label={__("Button URL", "b-blocks")}
+                    value={button.url}
+                    onChange={(value) => {
+                      setAttributes({
+                        sliders: updateData(
+                          sliders,
+                          value,
+                          index,
+                          "button",
+                          "url"
+                        ),
+                      });
+                    }}
+                  />
+                </>
+              )}
               <Flex>
                 <button
                   className="btn duplicate"
@@ -257,38 +297,51 @@ console.log(navigationBtn.icon);
         </button>
       </PanelBody>
 
-        {/* Option section  */}
+      {/* Option section  */}
 
       <PanelBody
         className="bPlPanelBody"
-        title={__("Options", "b-blocks")}
+        title={__("Slide Options", "b-blocks")}
         initialOpen={false}
       >
         <Flex justify="start" align="center" gap={2}>
-              <FormToggle
-                checked={navigationBtn.status}
-                onChange={() =>
-                  setAttributes({
-                    options: updateData(
-                      options,
-                      !navigationBtn.status,
-                      "navigationBtn",
-                      "status"
-                    ),
-                  })
-                }
-              />
-              <p className="mt10">Navigation Button</p>
-            </Flex>
-            {
-            navigationBtn.status && (
-            <>
-            <IconLibrary label={__("Select an icon", "b-blocks")} onChange={(value)=>{
-              setAttributes({options:updateData(options, value, "navigationBtn", "icon")})
+          <FormToggle
+            checked={navigationBtn.status}
+            onChange={() =>
+              setAttributes({
+                options: updateData(
+                  options,
+                  !navigationBtn.status,
+                  "navigationBtn",
+                  "status"
+                ),
+              })
             }
-            }/>
-            </>)
-          }
+          />
+          <p className="mt10">Navigation Button</p>
+        </Flex>
+        {navigationBtn.status && (
+          <>
+            <IconLibrary
+              label={__("Select an icon", "b-blocks")}
+              onChange={(value) => {
+                setAttributes({
+                  options: updateData(options, value, "navigationBtn", "icon"),
+                });
+              }}
+            />
+
+            <ColorControl
+              label={__("Button Color", "b-blocks")}
+              value={navigationBtn.color}
+              onChange={(value) =>
+                setAttributes({
+                  options: updateData(options, value, "navigationBtn", "color"),
+                })
+              }
+            />
+          </>
+        )}
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={autoPlay.isAutoPlay}
@@ -338,23 +391,89 @@ console.log(navigationBtn.icon);
             </Flex>
           </>
         )}
-        {
-          !autoPlay.isAutoPlay && <Flex justify="start" align="center" gap={2}>
+        {!autoPlay.isAutoPlay && (
+          <Flex justify="start" align="center" gap={2}>
+            <FormToggle
+              checked={loop}
+              onChange={() =>
+                setAttributes({
+                  options: updateData(options, !loop, "loop"),
+                })
+              }
+            />
+            <p className="mt10">Slide Loop</p>
+          </Flex>
+        )}
+        <Flex justify="start" align="center" gap={2}>
           <FormToggle
-            checked={loop}
+            checked={scrollBar}
+            onChange={() =>
+              setAttributes({
+                options: updateData(options, !scrollBar, "scrollBar"),
+              })
+            }
+          />
+          <p className="mt10">Hide Scrollbar</p>
+        </Flex>
+        <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={simulateTouch}
+            help
+            onChange={() =>
+              setAttributes({
+                options: updateData(options, !simulateTouch, "simulateTouch"),
+              })
+            }
+          />
+          <p className="mt10">Simulate on touch</p>
+        </Flex>
+        <small>Maybe Simulate touch not work properly on backend</small>
+        <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={keyboardControl}
+            help
             onChange={() =>
               setAttributes({
                 options: updateData(
                   options,
-                  !loop,
-                  "loop",
+                  !keyboardControl,
+                  "keyboardControl"
                 ),
               })
             }
           />
-          <p className="mt10">Slide Loop</p>
+          <p className="mt10">Keyboard Control</p>
         </Flex>
-        }
+        <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={mouseWheel}
+            help
+            onChange={() =>
+              setAttributes({
+                options: updateData(options, !mouseWheel, "mouseWheel"),
+              })
+            }
+          />
+          <p className="mt10">Mouse Wheel Control</p>
+        </Flex>
+      </PanelBody>
+      <PanelBody
+      className="bPlPanelBody"
+      title={__("Animation Options", "b-blocks")}
+      initialOpen={false}
+      >
+      <SelectControl
+          label={__("Select Animation Type", "b-blocks")}
+          value={textAnimation}
+          onChange={(value) => {setAttributes({options:updateData(options, value, "textAnimation")})}}
+          options={animationType}
+        />
+      <SelectControl
+          label={__("Animation Duration", "b-blocks")}
+          value={animationDuration}
+          onChange={(value) => {setAttributes({options:updateData(options, value, "animationDuration")})}}
+          options={animationDurationOptions}
+        />
       </PanelBody>
     </>
   );

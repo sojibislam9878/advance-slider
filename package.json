@@ -21,6 +21,7 @@
 		"bundle": "npm run lint && npm run build && npm run i18n && npm run plugin-zip"
 	},
 	"dependencies": {
+		"animate.css": "^4.1.1",
 		"immer": "^10.1.1",
 		"swiper": "^11.2.2"
 	},

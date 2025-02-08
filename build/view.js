@@ -23,11 +23,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper_css_navigation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! swiper/css/navigation */ "./node_modules/swiper/modules/navigation.css");
 /* harmony import */ var swiper_css_pagination__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! swiper/css/pagination */ "./node_modules/swiper/modules/pagination.css");
 /* harmony import */ var swiper_css_scrollbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! swiper/css/scrollbar */ "./node_modules/swiper/modules/scrollbar.css");
-/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
-/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utils/functions */ "./src/utils/functions.js");
+/* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! animate.css */ "./node_modules/animate.css/animate.css");
+/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/functions */ "./src/utils/functions.js");
 
-// import React, { useRef, useState } from 'react';
-// Import Swiper React components
+
+
 
 
 
@@ -49,7 +50,13 @@ const Slider = ({
   const {
     autoPlay,
     navigationBtn,
-    loop
+    loop,
+    scrollBar,
+    simulateTouch,
+    keyboardControl,
+    mouseWheel,
+    textAnimation,
+    animationDuration
   } = options || {};
   const {
     isAutoPlay,
@@ -64,44 +71,64 @@ const Slider = ({
     status,
     icon
   } = navigationBtn;
+  const swiperRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (swiperRef.current) {
+      const swiperInstance = swiperRef.current.swiper;
+      swiperInstance.on('slideChange', () => {
+        const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
+        const animatedElements = activeSlide.querySelectorAll('.AE');
+        animatedElements.forEach(element => {
+          // Add animation classes
+          element.classList.add('animate__animated', textAnimation, animationDuration);
+
+          // Remove the animation classes after the animation completes
+          setTimeout(() => {
+            element.classList.remove('animate__animated', textAnimation, animationDuration);
+          }, 2000); // Adjust the timeout to match the duration of your animation
+        });
+      });
+    }
+  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, animationDuration]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "slider"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_3__.Swiper, {
+    ref: swiperRef,
     onSwiper: swiper => {
       if (icon) {
         // Update previous button
         const prevBtn = swiper.navigation.prevEl;
         if (prevBtn) {
-          prevBtn.innerHTML = `${icon}`;
+          prevBtn.innerHTML = icon;
           prevBtn.classList.add("custom-swiper-btn");
         }
 
         // Update next button
         const nextBtn = swiper.navigation.nextEl;
         if (nextBtn) {
-          nextBtn.innerHTML = `${icon}`;
+          nextBtn.innerHTML = icon;
           nextBtn.classList.add("custom-swiper-btn");
         }
       }
     },
-    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}`,
+    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}`,
     autoplay: autoPlayConfig,
-    simulateTouch: true
-    // rewind={true}
-    ,
+    simulateTouch: simulateTouch,
     navigation: status,
     spaceBetween: 30,
     scrollbar: {
-      hide: false
+      hide: scrollBar
     },
     pagination: {
-      type: 'fraction',
       clickable: true,
       dynamicBullets: true
     },
     loop: loop,
-    direction: 'vertical',
-    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Scrollbar, swiper_modules__WEBPACK_IMPORTED_MODULE_8__.Autoplay],
+    keyboard: {
+      enabled: keyboardControl
+    },
+    mousewheel: mouseWheel,
+    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Scrollbar, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Keyboard, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Mousewheel],
     className: "mySwiper"
   }, sliders?.map((slider, index) => {
     const {
@@ -109,33 +136,37 @@ const Slider = ({
       description,
       button
     } = slider;
-    // console.log(button.url);
-
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_3__.SwiperSlide, {
       className: `swiper-slide swiper-slide-${index}`,
       key: index
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "content"
     }, from === "server" ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+      className: "header AE",
       tagName: "h1",
       placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Header..."),
       value: heading,
       onChange: value => setAttributes({
-        sliders: (0,_utils_functions__WEBPACK_IMPORTED_MODULE_9__.updateData)(sliders, value, index, "heading")
+        sliders: (0,_utils_functions__WEBPACK_IMPORTED_MODULE_10__.updateData)(sliders, value, index, "heading")
       })
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+      className: "description AE",
       tagName: "p",
       placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Description..."),
       value: description,
       onChange: value => setAttributes({
-        sliders: (0,_utils_functions__WEBPACK_IMPORTED_MODULE_9__.updateData)(sliders, value, index, "description")
+        sliders: (0,_utils_functions__WEBPACK_IMPORTED_MODULE_10__.updateData)(sliders, value, index, "description")
       })
-    })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, heading), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, description)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
+      className: "header AE"
+    }, heading), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+      className: "description AE"
+    }, description)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: button.url,
       target: "_blank",
       rel: "noreferrer"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      className: "button"
+    }, button.isButton && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      className: "button AE"
     }, button.label))));
   })));
 };
@@ -164,12 +195,23 @@ const Style = ({
 }) => {
   const {
     sliders,
-    layout
+    layout,
+    options,
+    styles
   } = attributes;
+  const {
+    header,
+    description
+  } = styles;
+  console.log(options.navigationBtn.color);
   const mainSl = `#${id}`;
   const blockSl = `${mainSl} .slider`;
   const sliderBodySl = `${blockSl} .mySwiper`;
+  const prevBtnSl = `${sliderBodySl} .swiper-button-prev`;
+  const nextBtnSl = `${sliderBodySl} .swiper-button-next`;
   const slideSl = `${sliderBodySl}  .swiper-slide`;
+  const headerSl = `${slideSl} .header`;
+  const descriptionSl = `${slideSl} .description`;
   const contentSl = `${slideSl} .content`;
 
   // border-top-left-radius:${layout.borderRadius.top} ;
@@ -192,6 +234,11 @@ const Style = ({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
     dangerouslySetInnerHTML: {
       __html: `
+        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)('', header.typo)?.googleFontLink}
+        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)('', description.typo)?.googleFontLink}
+        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)(headerSl, header.typo)?.styles}
+        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)(descriptionSl, description.typo)?.styles}
+		
         ${slidesBg}
 		
 		${sliderBodySl} {
@@ -206,7 +253,20 @@ const Style = ({
 		}
 
     ${contentSl}{
-    margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.padding.desktop)}
+    margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.padding.desktop)};
+    text-align:${styles.textAlign};
+    }
+
+
+    ${prevBtnSl}, ${nextBtnSl}{
+    fill: ${options.navigationBtn.color};
+    }
+
+    ${headerSl}{
+    color:${header.color};
+    }
+    ${descriptionSl}{
+    color:${description.color};
     }
 
     @media  (min-width:641px) and (max-width: 1024px){
@@ -672,6 +732,18 @@ const getOverlayCSS = (overlay, selector, isHover = false) => {
 		}
 	`.replace(/\s+/g, ' ').trim() : '';
 };
+
+/***/ }),
+
+/***/ "./node_modules/animate.css/animate.css":
+/*!**********************************************!*\
+  !*** ./node_modules/animate.css/animate.css ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
