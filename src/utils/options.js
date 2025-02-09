@@ -29,3 +29,10 @@ export const animationDurationOptions = [
 	{ label: 'Fast', value: 'animate__fast' },
 	{ label: 'Faster', value: 'animate__faster' }
 ]
+
+export const paginationTypeOptions =[
+
+	{label:"Normal", value:""},
+	{label:"Progress Bar", value:"progressbar"},
+	{label:"Numeric", value:"fraction"},
+]

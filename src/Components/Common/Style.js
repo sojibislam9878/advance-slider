@@ -1,10 +1,10 @@
-import { getBackgroundCSS, getBoxCSS, getMultiShadowCSS, getTypoCSS} from "../../../../bpl-tools/utils/getCSS";
+import { getBackgroundCSS, getBorderCSS, getBoxCSS, getColorsCSS, getMultiShadowCSS, getTypoCSS} from "../../../../bpl-tools/utils/getCSS";
 
 const Style = ({attributes, id }) => {
  const {sliders, layout, options, styles}= attributes
-const {header, description}=styles
+const {header, description, button}=styles
 
-console.log(options.navigationBtn.color)
+const {colors, border}=button
 
 
   const mainSl = `#${id}`;
@@ -16,6 +16,7 @@ console.log(options.navigationBtn.color)
   const headerSl = `${slideSl} .header`
   const descriptionSl = `${slideSl} .description`
   const contentSl = `${slideSl} .content`;
+  const buttonSl = `${contentSl} .button`;
   
   // border-top-left-radius:${layout.borderRadius.top} ;
   // border-top-right-radius:${layout.borderRadius.right}  ;
@@ -43,15 +44,16 @@ console.log(options.navigationBtn.color)
         ${getTypoCSS(descriptionSl, description.typo)?.styles}
 		
         ${slidesBg}
+        ${sliderBodySl}{
+        box-shadow: ${getMultiShadowCSS(layout.shadow)};
+        }
 		
 		${sliderBodySl} {
-			
        border: ${layout.border.width} ${layout.border.style} ${layout.border.color};
        height: ${layout.height.desktop};
        max-width: ${layout.width.desktop};
        border-radius:${getBoxCSS(layout.borderRadius)};
        margin:${getBoxCSS(layout.margin.desktop)};
-       box-shadow: ${getMultiShadowCSS(layout.shadow)};
        
 		}
 
@@ -72,6 +74,28 @@ console.log(options.navigationBtn.color)
     color:${description.color};
     }
 
+    ${buttonSl} {
+      ${getColorsCSS(colors)}
+      border: ${getBorderCSS(border)};
+      border-radius: ${border.radius};
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+  
+      &:hover {
+          opacity: 0.9;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+  
+      &:active {
+          transform: translateY(0);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+  }
     @media  (min-width:641px) and (max-width: 1024px){
         ${sliderBodySl}{
         min-height: ${layout.height.tablet};

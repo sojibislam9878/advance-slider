@@ -28,7 +28,11 @@ import {
 // import Sortable from "../../../../../../bpl-tools/Components/ItemsPanel/Sortable";
 import { updateData } from "../../../../utils/functions";
 import { deleteIcon, duplicateIcon } from "../../../../utils/icons";
-import {animationDurationOptions, animationType } from "../../../../utils/options";
+import {
+  animationDurationOptions,
+  animationType,
+  paginationTypeOptions,
+} from "../../../../utils/options";
 
 const General = ({ attributes, setAttributes, device }) => {
   const { sliders, layout, options } = attributes;
@@ -41,9 +45,14 @@ const General = ({ attributes, setAttributes, device }) => {
     simulateTouch,
     keyboardControl,
     mouseWheel,
-    textAnimation, 
-    animationDuration
+    textAnimation,
+    animationDuration,
+    isAnimation,
+    pagination,
   } = options || {};
+
+  console.log(isAnimation);
+  
 
   const handleAdd = () => {
     const defaultSlide = {
@@ -181,7 +190,6 @@ const General = ({ attributes, setAttributes, device }) => {
       >
         {sliders?.map((slider, index) => {
           const { background, heading, description, button = {} } = slider;
-          console.log(button?.isButton);
 
           return (
             <PanelBody
@@ -456,24 +464,95 @@ const General = ({ attributes, setAttributes, device }) => {
           />
           <p className="mt10">Mouse Wheel Control</p>
         </Flex>
+        <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={pagination.status}
+            onChange={() =>
+              setAttributes({
+                options: updateData(options, !pagination.status, "pagination", "status"),
+              })
+            }
+          />
+          <p className="mt10">Pagination</p>
+        </Flex>
+        {
+          pagination.status && (<>
+              <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={pagination.dynamicBullets}
+            onChange={() =>
+              setAttributes({
+                options: updateData(options, !pagination.dynamicBullets, "pagination", "dynamicBullets"),
+              })
+            }
+          />
+          <p className="mt10">Dynamic Bullets</p>
+        </Flex>
+        <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={pagination.clickable}
+            onChange={() =>
+              setAttributes({
+                options: updateData(options, !pagination.clickable, "pagination", "clickable"),
+              })
+            }
+          />
+          <p className="mt10">Clickable</p>
+        </Flex>
+        <SelectControl
+        label={__("Pagination Type", "b-blocks")}
+        value={pagination.type}
+        onChange={(value) =>
+          setAttributes({
+            options: updateData(options, value, "pagination", "type"),
+          })
+        }
+        options={paginationTypeOptions}
+        />
+          </>)
+        }
       </PanelBody>
       <PanelBody
-      className="bPlPanelBody"
-      title={__("Animation Options", "b-blocks")}
-      initialOpen={false}
+        className="bPlPanelBody"
+        title={__("Animation Options", "b-blocks")}
+        initialOpen={false}
       >
-      <SelectControl
-          label={__("Select Animation Type", "b-blocks")}
-          value={textAnimation}
-          onChange={(value) => {setAttributes({options:updateData(options, value, "textAnimation")})}}
-          options={animationType}
-        />
-      <SelectControl
-          label={__("Animation Duration", "b-blocks")}
-          value={animationDuration}
-          onChange={(value) => {setAttributes({options:updateData(options, value, "animationDuration")})}}
-          options={animationDurationOptions}
-        />
+        <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={isAnimation}
+            help
+            onChange={() =>
+              setAttributes({
+                options: updateData(options, !isAnimation, "isAnimation"),
+              })
+            }
+          />
+          <p className="mt10">Text Animation</p>
+        </Flex>
+        {isAnimation && (
+          <>
+            <SelectControl
+              label={__("Select Animation Type", "b-blocks")}
+              value={textAnimation}
+              onChange={(value) => {
+                setAttributes({
+                  options: updateData(options, value, "textAnimation"),
+                });
+              }}
+              options={animationType}
+            />
+            <SelectControl
+              label={__("Animation Duration", "b-blocks")}
+              value={animationDuration}
+              onChange={(value) => {
+                setAttributes({
+                  options: updateData(options, value, "animationDuration"),
+                });
+              }}
+              options={animationDurationOptions}
+            />
+          </>
+        )}
       </PanelBody>
     </>
   );

@@ -16,13 +16,6 @@
   justify-content: center;
   align-items: center;
 }
-.wp-block-b-blocks-advance-slider .slider .mySwiper .swiper-slide .content .button {
-  padding: 4px 16px;
-  color: white;
-  background-color: rgb(100, 100, 252);
-  border-radius: 6px;
-  font-size: medium;
-}
 .wp-block-b-blocks-advance-slider .slider .mySwiper .swiper-slide img {
   display: block;
   width: 100%;

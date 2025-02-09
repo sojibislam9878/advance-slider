@@ -12,14 +12,24 @@ import { updateData } from "../../utils/functions";
 
 const Slider = ({ attributes, setAttributes, from }) => {
   const { sliders, options } = attributes || [];
-  const { autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, textAnimation, animationDuration } = options || {};
+  const { autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, textAnimation, animationDuration, isAnimation, pagination } = options || {};
+  const { status: pageStatus, clickable, dynamicBullets, type } = pagination || {}
   const { isAutoPlay, delay, disableOnInteraction } = autoPlay;
-  const autoPlayConfig = isAutoPlay ? { delay, disableOnInteraction } : "";
   const { status, icon } = navigationBtn;
   const swiperRef = useRef(null);
-
+  
+  const autoPlayConfig = isAutoPlay ? { delay, disableOnInteraction } : "";
+  const paginationConfig = pageStatus 
+  ? type 
+    ? { clickable, dynamicBullets, type } 
+    : { clickable, dynamicBullets } 
+  : "";
   useEffect(() => {
-    if (swiperRef.current) {
+    if (!isAnimation) {
+      
+      return
+      
+    } else if (swiperRef.current) {
       const swiperInstance = swiperRef.current.swiper;
 
       swiperInstance.on('slideChange', () => {
@@ -37,7 +47,7 @@ const Slider = ({ attributes, setAttributes, from }) => {
         });
       });
     }
-  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel,animationDuration]);
+  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel,animationDuration,isAnimation, pageStatus, clickable, dynamicBullets, type]);
 
   return (
     <div className="slider">
@@ -60,13 +70,13 @@ const Slider = ({ attributes, setAttributes, from }) => {
             }
           }
         }}
-        key={`${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}`}
+        key={`${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}`}
         autoplay={autoPlayConfig}
         simulateTouch={simulateTouch}
         navigation={status}
         spaceBetween={30}
         scrollbar={{ hide: scrollBar }}
-        pagination={{ clickable: true, dynamicBullets: true }}
+        pagination={paginationConfig}
         loop={loop}
         keyboard={{ enabled: keyboardControl }}
         mousewheel={mouseWheel}

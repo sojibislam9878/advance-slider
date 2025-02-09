@@ -122,10 +122,16 @@
           }
         },
         "button": {
-          "color": "#fff",
-          "bgColor": "#00ff00",
-          "hovColor": "#00ff00",
-          "hovBgColor": "#ff0000"
+          "colors":{
+              "color":"#fff",
+              "bg":"#aaa"
+            },
+            "border":{
+              "width": "1px",
+              "color": "#0000ff",
+              "style": "solid",
+              "radius":"8px"
+            }
         },
         "textAlign":"center"
       }
@@ -217,9 +223,12 @@
         "scrollBar": true,
         "textAnimation":"animate__fadeInBottomRight",
         "animationDuration":"animate__fast",
+        "isAnimation": true,
         "pagination":{
             "status":true,
-            "isClickable":true
+            "dynamicBullets":true,
+            "clickable":true,
+            "type":""
 
         }
       }

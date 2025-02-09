@@ -56,24 +56,42 @@ const Slider = ({
     keyboardControl,
     mouseWheel,
     textAnimation,
-    animationDuration
+    animationDuration,
+    isAnimation,
+    pagination
   } = options || {};
+  const {
+    status: pageStatus,
+    clickable,
+    dynamicBullets,
+    type
+  } = pagination || {};
   const {
     isAutoPlay,
     delay,
     disableOnInteraction
   } = autoPlay;
-  const autoPlayConfig = isAutoPlay ? {
-    delay,
-    disableOnInteraction
-  } : "";
   const {
     status,
     icon
   } = navigationBtn;
   const swiperRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const autoPlayConfig = isAutoPlay ? {
+    delay,
+    disableOnInteraction
+  } : "";
+  const paginationConfig = pageStatus ? type ? {
+    clickable,
+    dynamicBullets,
+    type
+  } : {
+    clickable,
+    dynamicBullets
+  } : "";
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    if (swiperRef.current) {
+    if (!isAnimation) {
+      return;
+    } else if (swiperRef.current) {
       const swiperInstance = swiperRef.current.swiper;
       swiperInstance.on('slideChange', () => {
         const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
@@ -89,7 +107,7 @@ const Slider = ({
         });
       });
     }
-  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, animationDuration]);
+  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, animationDuration, isAnimation, pageStatus, clickable, dynamicBullets, type]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "slider"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_3__.Swiper, {
@@ -111,7 +129,7 @@ const Slider = ({
         }
       }
     },
-    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}`,
+    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}`,
     autoplay: autoPlayConfig,
     simulateTouch: simulateTouch,
     navigation: status,
@@ -119,10 +137,7 @@ const Slider = ({
     scrollbar: {
       hide: scrollBar
     },
-    pagination: {
-      clickable: true,
-      dynamicBullets: true
-    },
+    pagination: paginationConfig,
     loop: loop,
     keyboard: {
       enabled: keyboardControl
@@ -201,9 +216,13 @@ const Style = ({
   } = attributes;
   const {
     header,
-    description
+    description,
+    button
   } = styles;
-  console.log(options.navigationBtn.color);
+  const {
+    colors,
+    border
+  } = button;
   const mainSl = `#${id}`;
   const blockSl = `${mainSl} .slider`;
   const sliderBodySl = `${blockSl} .mySwiper`;
@@ -213,6 +232,7 @@ const Style = ({
   const headerSl = `${slideSl} .header`;
   const descriptionSl = `${slideSl} .description`;
   const contentSl = `${slideSl} .content`;
+  const buttonSl = `${contentSl} .button`;
 
   // border-top-left-radius:${layout.borderRadius.top} ;
   // border-top-right-radius:${layout.borderRadius.right}  ;
@@ -240,15 +260,16 @@ const Style = ({
         ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)(descriptionSl, description.typo)?.styles}
 		
         ${slidesBg}
+        ${sliderBodySl}{
+        box-shadow: ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getMultiShadowCSS)(layout.shadow)};
+        }
 		
 		${sliderBodySl} {
-			
        border: ${layout.border.width} ${layout.border.style} ${layout.border.color};
        height: ${layout.height.desktop};
        max-width: ${layout.width.desktop};
        border-radius:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.borderRadius)};
        margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.margin.desktop)};
-       box-shadow: ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getMultiShadowCSS)(layout.shadow)};
        
 		}
 
@@ -269,6 +290,28 @@ const Style = ({
     color:${description.color};
     }
 
+    ${buttonSl} {
+      ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getColorsCSS)(colors)}
+      border: ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBorderCSS)(border)};
+      border-radius: ${border.radius};
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+  
+      &:hover {
+          opacity: 0.9;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+  
+      &:active {
+          transform: translateY(0);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+  }
     @media  (min-width:641px) and (max-width: 1024px){
         ${sliderBodySl}{
         min-height: ${layout.height.tablet};
