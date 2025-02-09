@@ -1,9 +1,9 @@
 /*!***************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************/
-.wp-block-b-blocks-advance-slider .slider .mySwiper .swiper-button-next, .wp-block-b-blocks-advance-slider .slider .mySwiper .swiper-button-prev {
+.wp-block-b-blocks-advance-slider .slider .mySwiper .swiper-button-next,
+.wp-block-b-blocks-advance-slider .slider .mySwiper .swiper-button-prev {
   padding: 8px 12px;
-  /* Ensures the icon behaves like an inline element */
 }
 .wp-block-b-blocks-advance-slider .slider .mySwiper .swiper-button-prev {
   transform: scaleX(-1);
@@ -11,7 +11,6 @@
 .wp-block-b-blocks-advance-slider .slider .mySwiper .swiper-slide {
   text-align: center;
   font-size: 18px;
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;

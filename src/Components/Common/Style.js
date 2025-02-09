@@ -17,15 +17,9 @@ const {colors, border}=button
   const descriptionSl = `${slideSl} .description`
   const contentSl = `${slideSl} .content`;
   const buttonSl = `${contentSl} .button`;
-  
-  // border-top-left-radius:${layout.borderRadius.top} ;
-  // border-top-right-radius:${layout.borderRadius.right}  ;
-  // border-bottom-right-radius:${layout.borderRadius.bottom}  ;
-  // border-bottom-left-radius: ${layout.borderRadius.left} ;
 
   const slidesBg =sliders?.map((slider, index)=>{
     const {background}=slider;
-    // console.log(index);
     
     return`
      ${sliderBodySl} .swiper-slide-${index}{
@@ -34,6 +28,31 @@ const {colors, border}=button
     `
   }).join("\n");
 
+  const verticalBtnPosition = () => {
+    if (options.slideDirection === "vertical") {
+      return `
+        ${prevBtnSl}, ${nextBtnSl} {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          justify-content: center;
+        }
+  
+        ${prevBtnSl} {
+          top: 20px;
+          transform: translateX(-50%) rotate(-90deg);
+        }
+  
+        ${nextBtnSl} {
+          bottom: 0px;
+          margin-top: 120px;
+          transform: translateX(-50%) rotate(90deg);
+        }
+      `;
+    }
+    return ""; 
+  };
   return (
     <style
       dangerouslySetInnerHTML={{
@@ -119,6 +138,8 @@ const {colors, border}=button
           margin:${getBoxCSS(layout.padding.mobile)}
           }
     }
+
+    ${verticalBtnPosition()} 
 
 
 

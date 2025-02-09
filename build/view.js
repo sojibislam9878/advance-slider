@@ -65,7 +65,8 @@ const Slider = ({
     animationDuration,
     isAnimation,
     pagination,
-    slideEffects
+    slideEffects,
+    slideDirection
   } = options || {};
   const {
     status: pageStatus,
@@ -114,7 +115,7 @@ const Slider = ({
         });
       });
     }
-  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, animationDuration, isAnimation, pageStatus, clickable, dynamicBullets, type, slideEffects]);
+  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, animationDuration, isAnimation, pageStatus, clickable, dynamicBullets, type, slideEffects, slideDirection]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "slider"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_3__.Swiper, {
@@ -136,7 +137,7 @@ const Slider = ({
         }
       }
     },
-    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}-${slideEffects}`,
+    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}-${slideEffects}-${slideDirection}`,
     effect: `${slideEffects}`,
     creativeEffect: {
       prev: {
@@ -155,6 +156,7 @@ const Slider = ({
     ,
     pagination: paginationConfig,
     loop: loop,
+    direction: slideDirection ? "vertical" : "horizontal",
     keyboard: {
       enabled: keyboardControl
     },
@@ -249,24 +251,41 @@ const Style = ({
   const descriptionSl = `${slideSl} .description`;
   const contentSl = `${slideSl} .content`;
   const buttonSl = `${contentSl} .button`;
-
-  // border-top-left-radius:${layout.borderRadius.top} ;
-  // border-top-right-radius:${layout.borderRadius.right}  ;
-  // border-bottom-right-radius:${layout.borderRadius.bottom}  ;
-  // border-bottom-left-radius: ${layout.borderRadius.left} ;
-
   const slidesBg = sliders?.map((slider, index) => {
     const {
       background
     } = slider;
-    // console.log(index);
-
     return `
      ${sliderBodySl} .swiper-slide-${index}{
       ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBackgroundCSS)(background)}
      }
     `;
   }).join("\n");
+  const verticalBtnPosition = () => {
+    if (options.slideDirection === "vertical") {
+      return `
+        ${prevBtnSl}, ${nextBtnSl} {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          justify-content: center;
+        }
+  
+        ${prevBtnSl} {
+          top: 20px;
+          transform: translateX(-50%) rotate(-90deg);
+        }
+  
+        ${nextBtnSl} {
+          bottom: 0px;
+          margin-top: 120px;
+          transform: translateX(-50%) rotate(90deg);
+        }
+      `;
+    }
+    return "";
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
     dangerouslySetInnerHTML: {
       __html: `
@@ -351,6 +370,8 @@ const Style = ({
           margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.padding.mobile)}
           }
     }
+
+    ${verticalBtnPosition()} 
 
 
 

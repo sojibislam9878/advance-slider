@@ -3,9 +3,9 @@ import { __ } from "@wordpress/i18n";
 import {
   PanelBody,
   // SelectControl,
-  __experimentalInputControl as InputControl,
+  // __experimentalInputControl as InputControl,
   __experimentalUnitControl as UnitControl,
-  TextareaControl,
+  // TextareaControl,
   Flex,
   PanelRow,
   __experimentalBorderControl as BorderControl,
@@ -17,26 +17,29 @@ import {
 // import { purposeTypeOptions } from '../../../../utils/options';
 // import { updateData } from '../../../../utils/functions';
 import {
-  Background,
+  BButtonGroup,
+  // Background,
   BoxControl,
   ColorControl,
   Device,
   IconLibrary,
+  ItemsPanel,
   Label,
   ShadowControl,
 } from "../../../../../../bpl-tools/Components";
 // import Sortable from "../../../../../../bpl-tools/Components/ItemsPanel/Sortable";
 import { updateData } from "../../../../utils/functions";
-import { deleteIcon, duplicateIcon } from "../../../../utils/icons";
+// import { deleteIcon, duplicateIcon } from "../../../../utils/icons";
 import {
   animationDurationOptions,
   animationType,
   paginationTypeOptions,
   slideEffectsOptions,
 } from "../../../../utils/options";
+import Items from "../../Panel/Items";
 
 const General = ({ attributes, setAttributes, device }) => {
-  const { sliders, layout, options } = attributes;
+  const { layout, options } = attributes;
 
   const {
     autoPlay,
@@ -50,55 +53,85 @@ const General = ({ attributes, setAttributes, device }) => {
     animationDuration,
     isAnimation,
     pagination,
-    slideEffects
+    slideEffects,
+    slideDirection,
   } = options || {};
 
   console.log(isAnimation);
-  
 
-  const handleAdd = () => {
-    const defaultSlide = {
-      heading: "Hello World",
-      description:
-        "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
-      background: {
-        color: "rgba(0, 0, 255, 1)",
-        gradient: "linear-gradient(135deg, #4527a4, #8344c5)",
-        image: {
-          url: "https://i.ibb.co.com/4fck8Cv/8.jpg",
-        },
-        type: "solid",
-        repeat: "no-repeat",
-        size: "cover",
-        position: "center",
-        attachment: "scroll",
-      },
-      button: {
-        label: "visit",
-        url: "#",
-      },
-      overlay: "",
-    };
-    const newSildes = [...sliders, defaultSlide];
-    setAttributes({ sliders: newSildes });
-  };
+  // const handleAdd = () => {
+  //   const defaultSlide = {
+  //     heading: "Hello World",
+  //     description:
+  //       "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
+  //     background: {
+  //       color: "rgba(0, 0, 255, 1)",
+  //       gradient: "linear-gradient(135deg, #4527a4, #8344c5)",
+  //       image: {
+  //         url: "https://i.ibb.co.com/4fck8Cv/8.jpg",
+  //       },
+  //       type: "solid",
+  //       repeat: "no-repeat",
+  //       size: "cover",
+  //       position: "center",
+  //       attachment: "scroll",
+  //     },
+  //     button: {
+  //       label: "visit",
+  //       url: "#",
+  //     },
+  //     overlay: "",
+  //   };
+  //   const newSildes = [...sliders, defaultSlide];
+  //   setAttributes({ sliders: newSildes });
+  // };
 
-  const handleDuplicate = (index) => {
-    const slideToDuplicate = { ...sliders[index] };
-    const updatedSlides = [...sliders];
-    updatedSlides.splice(index + 1, 0, slideToDuplicate);
-    setAttributes({ sliders: updatedSlides });
-  };
+  // const handleDuplicate = (index) => {
+  //   const slideToDuplicate = { ...sliders[index] };
+  //   const updatedSlides = [...sliders];
+  //   updatedSlides.splice(index + 1, 0, slideToDuplicate);
+  //   setAttributes({ sliders: updatedSlides });
+  // };
 
-  const handleDelete = (index) => {
-    const updatedSliders = sliders.filter((_, indx) => indx !== index);
-    setAttributes({ sliders: updatedSliders });
-  };
-  console.log(navigationBtn.icon);
+  // const handleDelete = (index) => {
+  //   const updatedSliders = sliders.filter((_, indx) => indx !== index);
+  //   setAttributes({ sliders: updatedSliders });
+  // };
 
   return (
     <>
       {/* Layout Setting Section */}
+      <PanelBody className="bPlPanelBody" title={__("Slides", "b-blocks")}>
+      <ItemsPanel
+        {...{attributes, setAttributes}}
+        arrKey="sliders"
+        newItem={ {
+          "heading": "Hello World",
+          "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
+          "background": {
+            "color": "rgba(0, 0, 255, 1)",
+            "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
+            "image": {
+              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+            },
+            "type": "solid",
+            "repeat": "no-repeat",
+            "size": "cover",
+            "position": "center",
+            "overlayColor": "",
+            "attachment": "scroll"
+          },
+          "button": {
+            "isButton":true,
+            "label": "visit",
+            "url": "#"
+          }
+        }}
+        ItemSettings={Items}
+        itemLabel="Slide"
+        design="sortable" 
+      />
+    </PanelBody>
 
       <PanelBody
         className="bPlPanelBody"
@@ -185,7 +218,7 @@ const General = ({ attributes, setAttributes, device }) => {
 
       {/* Slides Section */}
 
-      <PanelBody
+      {/* <PanelBody
         className="bPlPanelBody"
         title={__("Slides", "b-blocks")}
         initialOpen={false}
@@ -305,7 +338,7 @@ const General = ({ attributes, setAttributes, device }) => {
         <button onClick={handleAdd} className="btn add">
           Add
         </button>
-      </PanelBody>
+      </PanelBody> */}
 
       {/* Option section  */}
 
@@ -314,6 +347,18 @@ const General = ({ attributes, setAttributes, device }) => {
         title={__("Slide Options", "b-blocks")}
         initialOpen={false}
       >
+        
+        <BButtonGroup
+        options={[
+          { label: "Horizontal", value: "horizontal" },
+          { label: "Vertical", value: "vertical" }
+        ]}
+        value={slideDirection}
+        onChange={(value) => {
+          setAttributes({ options:updateData(options, value, "slideDirection") });
+        }}
+        label="Slide Direction"
+      />
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={navigationBtn.status}
@@ -471,58 +516,73 @@ const General = ({ attributes, setAttributes, device }) => {
             checked={pagination.status}
             onChange={() =>
               setAttributes({
-                options: updateData(options, !pagination.status, "pagination", "status"),
+                options: updateData(
+                  options,
+                  !pagination.status,
+                  "pagination",
+                  "status"
+                ),
               })
             }
           />
           <p className="mt10">Pagination</p>
         </Flex>
-        {
-          pagination.status && (<>
-              <Flex justify="start" align="center" gap={2}>
-          <FormToggle
-            checked={pagination.dynamicBullets}
-            onChange={() =>
-              setAttributes({
-                options: updateData(options, !pagination.dynamicBullets, "pagination", "dynamicBullets"),
-              })
-            }
-          />
-          <p className="mt10">Dynamic Bullets</p>
-        </Flex>
-        <Flex justify="start" align="center" gap={2}>
-          <FormToggle
-            checked={pagination.clickable}
-            onChange={() =>
-              setAttributes({
-                options: updateData(options, !pagination.clickable, "pagination", "clickable"),
-              })
-            }
-          />
-          <p className="mt10">Clickable</p>
-        </Flex>
-        <SelectControl
-        label={__("Pagination Type", "b-blocks")}
-        value={pagination.type}
-        onChange={(value) =>
-          setAttributes({
-            options: updateData(options, value, "pagination", "type"),
-          })
-        }
-        options={paginationTypeOptions}
-        />
-          </>)
-        }
+        {pagination.status && (
+          <>
+            <Flex justify="start" align="center" gap={2}>
+              <FormToggle
+                checked={pagination.dynamicBullets}
+                onChange={() =>
+                  setAttributes({
+                    options: updateData(
+                      options,
+                      !pagination.dynamicBullets,
+                      "pagination",
+                      "dynamicBullets"
+                    ),
+                  })
+                }
+              />
+              <p className="mt10">Dynamic Bullets</p>
+            </Flex>
+            <Flex justify="start" align="center" gap={2}>
+              <FormToggle
+                checked={pagination.clickable}
+                onChange={() =>
+                  setAttributes({
+                    options: updateData(
+                      options,
+                      !pagination.clickable,
+                      "pagination",
+                      "clickable"
+                    ),
+                  })
+                }
+              />
+              <p className="mt10">Clickable</p>
+            </Flex>
+            <SelectControl
+              label={__("Pagination Type", "b-blocks")}
+              value={pagination.type}
+              onChange={(value) =>
+                setAttributes({
+                  options: updateData(options, value, "pagination", "type"),
+                })
+              }
+              options={paginationTypeOptions}
+            />
+          </>
+        )}
 
-<SelectControl
-        label={__("Slide Effects", "b-blocks")}
-        value={slideEffects}
-        onChange={(value) =>
-          setAttributes({
-            options: updateData(options, value, "slideEffects"),
-          })
-        }
-        options={slideEffectsOptions}
+        <SelectControl
+          label={__("Slide Effects", "b-blocks")}
+          value={slideEffects}
+          onChange={(value) =>
+            setAttributes({
+              options: updateData(options, value, "slideEffects"),
+            })
+          }
+          options={slideEffectsOptions}
         />
       </PanelBody>
       <PanelBody

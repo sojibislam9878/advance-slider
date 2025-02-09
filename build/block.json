@@ -232,7 +232,8 @@
           "clickable": true,
           "type": ""
         },
-        "slideEffects": ""
+        "slideEffects": "",
+        "slideDirection": ""
       }
     },
     "align": {
