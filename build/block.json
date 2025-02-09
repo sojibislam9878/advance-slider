@@ -231,7 +231,8 @@
           "dynamicBullets": true,
           "clickable": true,
           "type": ""
-        }
+        },
+        "slideEffects": ""
       }
     },
     "align": {

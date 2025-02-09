@@ -7,12 +7,15 @@ import "swiper/css/navigation";
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'animate.css';
-import { Navigation, Pagination, Scrollbar, Autoplay, Keyboard, Mousewheel } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar, Autoplay, Keyboard, Mousewheel,EffectFade,EffectFlip, EffectCreative, EffectCards } from "swiper/modules";
 import { updateData } from "../../utils/functions";
+import "swiper/css/effect-fade";
+import 'swiper/css/effect-flip';
+import 'swiper/css/effect-cards';
 
 const Slider = ({ attributes, setAttributes, from }) => {
   const { sliders, options } = attributes || [];
-  const { autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, textAnimation, animationDuration, isAnimation, pagination } = options || {};
+  const { autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, textAnimation, animationDuration, isAnimation, pagination, slideEffects } = options || {};
   const { status: pageStatus, clickable, dynamicBullets, type } = pagination || {}
   const { isAutoPlay, delay, disableOnInteraction } = autoPlay;
   const { status, icon } = navigationBtn;
@@ -47,7 +50,7 @@ const Slider = ({ attributes, setAttributes, from }) => {
         });
       });
     }
-  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel,animationDuration,isAnimation, pageStatus, clickable, dynamicBullets, type]);
+  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel,animationDuration,isAnimation, pageStatus, clickable, dynamicBullets, type, slideEffects]);
 
   return (
     <div className="slider">
@@ -70,17 +73,27 @@ const Slider = ({ attributes, setAttributes, from }) => {
             }
           }
         }}
-        key={`${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}`}
+        key={`${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}-${slideEffects}`}
+        effect={`${slideEffects}`}
+        creativeEffect={{
+          prev: {
+            shadow: true,
+            translate: [0, 0, -400],
+          },
+          next: {
+            translate: ['100%', 0, 0],
+          },
+        }}
         autoplay={autoPlayConfig}
         simulateTouch={simulateTouch}
         navigation={status}
-        spaceBetween={30}
-        scrollbar={{ hide: scrollBar }}
+        // spaceBetween={30}
+        // scrollbar={{ hide: scrollBar }}
         pagination={paginationConfig}
         loop={loop}
         keyboard={{ enabled: keyboardControl }}
         mousewheel={mouseWheel}
-        modules={[Navigation, Pagination, Scrollbar, Autoplay, Keyboard, Mousewheel]}
+        modules={[Navigation, Pagination, Scrollbar, Autoplay, Keyboard, Mousewheel, EffectFade,EffectFlip, EffectCreative, EffectCards]}
         className="mySwiper"
       >
         {sliders?.map((slider, index) => {

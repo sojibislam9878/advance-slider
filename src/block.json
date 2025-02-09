@@ -230,7 +230,8 @@
             "clickable":true,
             "type":""
 
-        }
+        },
+        "slideEffects":""
       }
     },
     "align": {

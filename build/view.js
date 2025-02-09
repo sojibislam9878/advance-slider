@@ -26,6 +26,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! animate.css */ "./node_modules/animate.css/animate.css");
 /* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
 /* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/functions */ "./src/utils/functions.js");
+/* harmony import */ var swiper_css_effect_fade__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! swiper/css/effect-fade */ "./node_modules/swiper/modules/effect-fade.css");
+/* harmony import */ var swiper_css_effect_flip__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! swiper/css/effect-flip */ "./node_modules/swiper/modules/effect-flip.css");
+/* harmony import */ var swiper_css_effect_cards__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! swiper/css/effect-cards */ "./node_modules/swiper/modules/effect-cards.css");
+
+
+
 
 
 
@@ -58,7 +64,8 @@ const Slider = ({
     textAnimation,
     animationDuration,
     isAnimation,
-    pagination
+    pagination,
+    slideEffects
   } = options || {};
   const {
     status: pageStatus,
@@ -107,7 +114,7 @@ const Slider = ({
         });
       });
     }
-  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, animationDuration, isAnimation, pageStatus, clickable, dynamicBullets, type]);
+  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, animationDuration, isAnimation, pageStatus, clickable, dynamicBullets, type, slideEffects]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "slider"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_3__.Swiper, {
@@ -129,21 +136,30 @@ const Slider = ({
         }
       }
     },
-    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}`,
+    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}-${slideEffects}`,
+    effect: `${slideEffects}`,
+    creativeEffect: {
+      prev: {
+        shadow: true,
+        translate: [0, 0, -400]
+      },
+      next: {
+        translate: ['100%', 0, 0]
+      }
+    },
     autoplay: autoPlayConfig,
     simulateTouch: simulateTouch,
-    navigation: status,
-    spaceBetween: 30,
-    scrollbar: {
-      hide: scrollBar
-    },
+    navigation: status
+    // spaceBetween={30}
+    // scrollbar={{ hide: scrollBar }}
+    ,
     pagination: paginationConfig,
     loop: loop,
     keyboard: {
       enabled: keyboardControl
     },
     mousewheel: mouseWheel,
-    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Scrollbar, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Keyboard, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Mousewheel],
+    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Pagination, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Scrollbar, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Autoplay, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Keyboard, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.Mousewheel, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.EffectFade, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.EffectFlip, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.EffectCreative, swiper_modules__WEBPACK_IMPORTED_MODULE_9__.EffectCards],
     className: "mySwiper"
   }, sliders?.map((slider, index) => {
     const {
@@ -782,6 +798,42 @@ const getOverlayCSS = (overlay, selector, isHover = false) => {
 /*!**********************************************!*\
   !*** ./node_modules/animate.css/animate.css ***!
   \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/effect-cards.css":
+/*!******************************************************!*\
+  !*** ./node_modules/swiper/modules/effect-cards.css ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/effect-fade.css":
+/*!*****************************************************!*\
+  !*** ./node_modules/swiper/modules/effect-fade.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/swiper/modules/effect-flip.css":
+/*!*****************************************************!*\
+  !*** ./node_modules/swiper/modules/effect-flip.css ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

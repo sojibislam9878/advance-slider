@@ -32,6 +32,7 @@ import {
   animationDurationOptions,
   animationType,
   paginationTypeOptions,
+  slideEffectsOptions,
 } from "../../../../utils/options";
 
 const General = ({ attributes, setAttributes, device }) => {
@@ -41,7 +42,7 @@ const General = ({ attributes, setAttributes, device }) => {
     autoPlay,
     navigationBtn,
     loop,
-    scrollBar,
+    // scrollBar,
     simulateTouch,
     keyboardControl,
     mouseWheel,
@@ -49,6 +50,7 @@ const General = ({ attributes, setAttributes, device }) => {
     animationDuration,
     isAnimation,
     pagination,
+    slideEffects
   } = options || {};
 
   console.log(isAnimation);
@@ -412,7 +414,7 @@ const General = ({ attributes, setAttributes, device }) => {
             <p className="mt10">Slide Loop</p>
           </Flex>
         )}
-        <Flex justify="start" align="center" gap={2}>
+        {/* <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={scrollBar}
             onChange={() =>
@@ -422,7 +424,7 @@ const General = ({ attributes, setAttributes, device }) => {
             }
           />
           <p className="mt10">Hide Scrollbar</p>
-        </Flex>
+        </Flex> */}
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={simulateTouch}
@@ -511,6 +513,17 @@ const General = ({ attributes, setAttributes, device }) => {
         />
           </>)
         }
+
+<SelectControl
+        label={__("Slide Effects", "b-blocks")}
+        value={slideEffects}
+        onChange={(value) =>
+          setAttributes({
+            options: updateData(options, value, "slideEffects"),
+          })
+        }
+        options={slideEffectsOptions}
+        />
       </PanelBody>
       <PanelBody
         className="bPlPanelBody"
