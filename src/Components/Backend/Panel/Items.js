@@ -32,6 +32,14 @@ const Items = ({
 
   return (
     <div>
+      <Background
+        value={sliders[index]?.background}
+        onChange={(value) => {
+          setAttributes({
+            sliders: updateData(sliders, value, index, "background"),
+          });
+        }}
+      />
       <InputControl
         value={sliders[index]?.heading}
         //   onChange={v => updateSlides("heading",v)}
@@ -51,15 +59,6 @@ const Items = ({
             sliders: updateData(sliders, value, index, "description"),
           })
         }
-      />
-
-      <Background
-        value={sliders[index]?.background}
-        onChange={(value) => {
-          setAttributes({
-            sliders: updateData(sliders, value, index, "background"),
-          });
-        }}
       />
 
       <Flex justify="start" align="center" gap={2}>

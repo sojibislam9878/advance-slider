@@ -17,19 +17,19 @@
       "type": "array",
       "default": [
         {
-          "heading": "Hello World",
+          "heading": "Slide 1",
           "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
           "background": {
             "color": "rgba(0, 0, 255, 1)",
             "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
             "image": {
-              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+              "url": "https://i.ibb.co.com/Ld0V6vwd/b7d133fc-df63-497f-af84-f801f3ee6f25.jpg"
             },
-            "type": "solid",
+            "type": "image",
             "repeat": "no-repeat",
             "size": "cover",
             "position": "center",
-            "overlayColor": "",
+            "overlayColor": "#00000061",
             "attachment": "scroll"
           },
           "button": {
@@ -39,19 +39,19 @@
           }
         },
         {
-          "heading": "Hello World",
+          "heading": "Slide 2",
           "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
           "background": {
             "color": "rgba(0, 0, 255, 1)",
             "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
             "image": {
-              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+              "url": "https://i.ibb.co.com/LdXsrnvm/86758909-ea96-4ba9-a343-31de0d287b5c.jpg"
             },
-            "type": "solid",
+            "type": "image",
             "repeat": "no-repeat",
             "size": "cover",
             "position": "center",
-            "overlayColor": "",
+            "overlayColor": "#00000061",
             "attachment": "scroll"
           },
           "button": {
@@ -61,19 +61,19 @@
           }
         },
         {
-          "heading": "Hello World",
+          "heading": "Slide 3",
           "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
           "background": {
             "color": "rgba(0, 0, 255, 1)",
             "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
             "image": {
-              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+              "url": "https://i.ibb.co.com/ds8SB928/501faddf-00aa-4186-afb7-789d0f8e59d9.jpg"
             },
-            "type": "solid",
+            "type": "image",
             "repeat": "no-repeat",
             "size": "cover",
             "position": "center",
-            "overlayColor": "",
+            "overlayColor": "#00000061",
             "attachment": "scroll"
           },
           "button": {
@@ -93,7 +93,7 @@
             "fontCategory": "",
             "fontFamily": "",
             "fontSize": {
-              "desktop": 36,
+              "desktop": 55,
               "mobile": 28,
               "tablet": 16
             },
@@ -111,7 +111,7 @@
             "fontCategory": "",
             "fontFamily": "",
             "fontSize": {
-              "desktop": 36,
+              "desktop": 26,
               "mobile": 28,
               "tablet": 16
             },
@@ -142,13 +142,13 @@
       "type": "object",
       "default": {
         "height": {
-          "desktop": "350px",
+          "desktop": "500px",
           "tablet": "350px",
           "mobile": "300px"
         },
         "width": {
-          "desktop": "60%",
-          "tablet": "80%",
+          "desktop": "100%",
+          "tablet": "100%",
           "mobile": "100%"
         },
         "borderRadius": {
@@ -165,8 +165,8 @@
         "padding": {
           "desktop": {
             "top": "10px",
-            "left": "10px",
-            "right": "10px",
+            "left": "28px",
+            "right": "28px",
             "bottom": "10px"
           },
           "tablet": {

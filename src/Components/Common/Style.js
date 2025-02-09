@@ -79,6 +79,7 @@ const {colors, border}=button
     ${contentSl}{
     margin:${getBoxCSS(layout.padding.desktop)};
     text-align:${styles.textAlign};
+    max-width: ${layout.width.desktop};
     }
 
 

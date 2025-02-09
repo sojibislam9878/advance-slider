@@ -311,6 +311,7 @@ const Style = ({
     ${contentSl}{
     margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.padding.desktop)};
     text-align:${styles.textAlign};
+    max-width: ${layout.width.desktop};
     }
 
 

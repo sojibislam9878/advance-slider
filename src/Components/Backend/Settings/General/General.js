@@ -112,13 +112,13 @@ const General = ({ attributes, setAttributes, device }) => {
             "color": "rgba(0, 0, 255, 1)",
             "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
             "image": {
-              "url": "https://i.ibb.co.com/4fck8Cv/8.jpg"
+              "url": "https://i.ibb.co.com/0jDXVmFJ/23227107-f847-4a25-ac32-74562e88cf0f.jpg"
             },
-            "type": "solid",
+            "type": "image",
             "repeat": "no-repeat",
             "size": "cover",
             "position": "center",
-            "overlayColor": "",
+            "overlayColor": "#00000061",
             "attachment": "scroll"
           },
           "button": {
