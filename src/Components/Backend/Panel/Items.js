@@ -41,6 +41,8 @@ const Items = ({
         }}
       />
       <InputControl
+      label={__("Header", "b-blocks")}
+      placeholder={__("Header...", "b-blocks")}
         value={sliders[index]?.heading}
         //   onChange={v => updateSlides("heading",v)}
         onChange={(value) =>
@@ -52,6 +54,7 @@ const Items = ({
 
       <TextareaControl
         className="mt5"
+        placeholder={__("Description...", "b-blocks")}
         label={__("Description", "b-blocks")}
         value={sliders[index]?.description}
         onChange={(value) =>

@@ -66,7 +66,8 @@ const Slider = ({
     isAnimation,
     pagination,
     slideEffects,
-    slideDirection
+    slideDirection,
+    grabCursor
   } = options || {};
   const {
     status: pageStatus,
@@ -115,7 +116,7 @@ const Slider = ({
         });
       });
     }
-  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, animationDuration, isAnimation, pageStatus, clickable, dynamicBullets, type, slideEffects, slideDirection]);
+  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, animationDuration, isAnimation, pageStatus, clickable, dynamicBullets, type, slideEffects, slideDirection, grabCursor]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "slider"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(swiper_react__WEBPACK_IMPORTED_MODULE_3__.Swiper, {
@@ -137,7 +138,7 @@ const Slider = ({
         }
       }
     },
-    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}-${slideEffects}-${slideDirection}`,
+    key: `${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}-${slideEffects}-${slideDirection}-${grabCursor}`,
     effect: `${slideEffects}`,
     creativeEffect: {
       prev: {
@@ -150,13 +151,14 @@ const Slider = ({
     },
     autoplay: autoPlayConfig,
     simulateTouch: simulateTouch,
-    navigation: status
+    navigation: status,
+    grabCursor: grabCursor
     // spaceBetween={30}
     // scrollbar={{ hide: scrollBar }}
     ,
     pagination: paginationConfig,
     loop: loop,
-    direction: slideDirection ? "vertical" : "horizontal",
+    direction: `${slideDirection}`,
     keyboard: {
       enabled: keyboardControl
     },
@@ -279,7 +281,7 @@ const Style = ({
   
         ${nextBtnSl} {
           bottom: 0px;
-          margin-top: 120px;
+          margin-top: 180px;
           transform: translateX(-50%) rotate(90deg);
         }
       `;
@@ -350,7 +352,7 @@ const Style = ({
   }
     @media  (min-width:641px) and (max-width: 1024px){
         ${sliderBodySl}{
-        min-height: ${layout.height.tablet};
+        height: ${layout.height.tablet};
         max-width: ${layout.width.tablet};
         margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.margin.tablet)}
         }
@@ -362,7 +364,7 @@ const Style = ({
 
     @media (max-width: 480px){
       ${sliderBodySl}{
-        min-height: ${layout.height.mobile};
+        height: ${layout.height.mobile};
         max-width: ${layout.width.mobile};
         margin:${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBoxCSS)(layout.margin.mobile)}
         }

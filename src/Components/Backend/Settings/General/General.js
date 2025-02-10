@@ -55,6 +55,7 @@ const General = ({ attributes, setAttributes, device }) => {
     pagination,
     slideEffects,
     slideDirection,
+    grabCursor,
   } = options || {};
 
   console.log(isAnimation);
@@ -106,7 +107,7 @@ const General = ({ attributes, setAttributes, device }) => {
         {...{attributes, setAttributes}}
         arrKey="sliders"
         newItem={ {
-          "heading": "Hello World",
+          "heading": "new slider",
           "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
           "background": {
             "color": "rgba(0, 0, 255, 1)",
@@ -122,7 +123,7 @@ const General = ({ attributes, setAttributes, device }) => {
             "attachment": "scroll"
           },
           "button": {
-            "isButton":true,
+            "isButton":false,
             "label": "visit",
             "url": "#"
           }
@@ -482,6 +483,20 @@ const General = ({ attributes, setAttributes, device }) => {
           />
           <p className="mt10">Simulate on touch</p>
         </Flex>
+        {
+          simulateTouch && <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={grabCursor}
+            help
+            onChange={() =>
+              setAttributes({
+                options: updateData(options, !grabCursor, "grabCursor"),
+              })
+            }
+          />
+          <p className="mt10">Grab Curson</p>
+        </Flex>
+        }
         <small>Maybe Simulate touch not work properly on backend</small>
         <Flex justify="start" align="center" gap={2}>
           <FormToggle

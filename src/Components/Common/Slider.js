@@ -15,7 +15,7 @@ import 'swiper/css/effect-cards';
 
 const Slider = ({ attributes, setAttributes, from }) => {
   const { sliders, options } = attributes || [];
-  const { autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, textAnimation, animationDuration, isAnimation, pagination, slideEffects, slideDirection } = options || {};
+  const { autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, textAnimation, animationDuration, isAnimation, pagination, slideEffects, slideDirection, grabCursor } = options || {};
   const { status: pageStatus, clickable, dynamicBullets, type } = pagination || {}
   const { isAutoPlay, delay, disableOnInteraction } = autoPlay;
   const { status, icon } = navigationBtn;
@@ -50,7 +50,7 @@ const Slider = ({ attributes, setAttributes, from }) => {
         });
       });
     }
-  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel,animationDuration,isAnimation, pageStatus, clickable, dynamicBullets, type, slideEffects, slideDirection]);
+  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel,animationDuration,isAnimation, pageStatus, clickable, dynamicBullets, type, slideEffects, slideDirection,grabCursor]);
 
   return (
     <div className="slider">
@@ -73,7 +73,7 @@ const Slider = ({ attributes, setAttributes, from }) => {
             }
           }
         }}
-        key={`${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}-${slideEffects}-${slideDirection}`}
+        key={`${isAutoPlay}-${delay}-${disableOnInteraction}-${status}-${icon}-${loop}-${scrollBar}-${simulateTouch}-${keyboardControl}-${mouseWheel}-${textAnimation}-${animationDuration}-${isAnimation}-${pageStatus}-${clickable}-${dynamicBullets}-${type}-${slideEffects}-${slideDirection}-${grabCursor}`}
         effect={`${slideEffects}`}
         creativeEffect={{
           prev: {
@@ -87,11 +87,12 @@ const Slider = ({ attributes, setAttributes, from }) => {
         autoplay={autoPlayConfig}
         simulateTouch={simulateTouch}
         navigation={status}
+        grabCursor={grabCursor}
         // spaceBetween={30}
         // scrollbar={{ hide: scrollBar }}
         pagination={paginationConfig}
         loop={loop}
-        direction={slideDirection ? "vertical" : "horizontal"}
+        direction={`${slideDirection}`}
         keyboard={{ enabled: keyboardControl }}
         mousewheel={mouseWheel}
         modules={[Navigation, Pagination, Scrollbar, Autoplay, Keyboard, Mousewheel, EffectFade,EffectFlip, EffectCreative, EffectCards]}

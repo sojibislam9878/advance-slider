@@ -46,7 +46,7 @@ const {colors, border}=button
   
         ${nextBtnSl} {
           bottom: 0px;
-          margin-top: 120px;
+          margin-top: 180px;
           transform: translateX(-50%) rotate(90deg);
         }
       `;
@@ -118,7 +118,7 @@ const {colors, border}=button
   }
     @media  (min-width:641px) and (max-width: 1024px){
         ${sliderBodySl}{
-        min-height: ${layout.height.tablet};
+        height: ${layout.height.tablet};
         max-width: ${layout.width.tablet};
         margin:${getBoxCSS(layout.margin.tablet)}
         }
@@ -130,7 +130,7 @@ const {colors, border}=button
 
     @media (max-width: 480px){
       ${sliderBodySl}{
-        min-height: ${layout.height.mobile};
+        height: ${layout.height.mobile};
         max-width: ${layout.width.mobile};
         margin:${getBoxCSS(layout.margin.mobile)}
         }

@@ -29,7 +29,7 @@
             "attachment": "scroll"
           },
           "button": {
-            "isButton":true,
+            "isButton":false,
             "label": "visit",
             "url": "#"
           }
@@ -51,7 +51,7 @@
             "attachment": "scroll"
           },
           "button": {
-            "isButton":true,
+            "isButton":false,
             "label": "visit",
             "url": "#"
           }
@@ -73,7 +73,7 @@
             "attachment": "scroll"
           },
           "button": {
-            "isButton":true,
+            "isButton":false,
             "label": "visit",
             "url": "#"
           }
@@ -91,8 +91,8 @@
             "fontFamily": "",
             "fontSize": {
               "desktop": 55,
-              "mobile": 28,
-              "tablet": 16
+              "mobile": 36,
+              "tablet": 38
             },
             "fontVariant": 400,
             "fontWeight": 400,
@@ -110,8 +110,8 @@
             "fontFamily": "",
             "fontSize": {
               "desktop": 26,
-              "mobile": 28,
-              "tablet": 16
+              "mobile": 16,
+              "tablet": 18
             },
             "fontVariant": 400,
             "fontWeight": 400,
@@ -124,7 +124,7 @@
         "button": {
           "colors":{
               "color":"#fff",
-              "bg":"#aaa"
+              "bg":"linear-gradient(120deg, #1d976c, #93f9b9)"
             },
             "border":{
               "width": "1px",
@@ -142,7 +142,7 @@
         "height": {
           "desktop": "500px",
           "tablet": "350px",
-          "mobile": "300px"
+          "mobile": "400px"
         },
         "width": {
           "desktop": "100%",
@@ -156,36 +156,36 @@
           "bottom": "10px"
         },
         "border": {
-          "width": "1px",
+          "width": "0px",
           "color": "#0000ff",
           "style": "solid"
         },
         "padding": {
           "desktop": {
-            "top": "10px",
-            "left": "28px",
-            "right": "28px",
-            "bottom": "10px"
+            "top": "48px",
+            "left": "48px",
+            "right": "48px",
+            "bottom": "48px"
           },
           "tablet": {
-            "top": "10px",
-            "left": "10px",
-            "right": "10px",
-            "bottom": "10px"
+            "top": "46px",
+            "left": "46px",
+            "right": "46px",
+            "bottom": "46px"
           },
           "mobile": {
-            "top": "10px",
-            "left": "10px",
-            "right": "10px",
-            "bottom": "10px"
+            "top": "0px",
+            "left": "28px",
+            "right": "28px",
+            "bottom": "0px"
           }
         },
         "margin": {
           "desktop": {
-            "top": "10px",
-            "left": "10px",
-            "right": "10px",
-            "bottom": "10px"
+            "top": "0px",
+            "left": "0px",
+            "right": "0px",
+            "bottom": "0px"
           },
           "tablet": {
             "top": "10px",
@@ -224,6 +224,7 @@
         "textAnimation":"animate__fadeInBottomRight",
         "animationDuration":"animate__fast",
         "isAnimation": true,
+        "grabCursor": false,
         "pagination":{
             "status":true,
             "dynamicBullets":true,
@@ -232,7 +233,7 @@
 
         },
         "slideEffects":"",
-        "slideDirection":""
+        "slideDirection":"horizontal"
       }
     },
     "align": {
