@@ -29,8 +29,9 @@
             "attachment": "scroll"
           },
           "button": {
-            "isButton":false,
+            "isButton": false,
             "label": "visit",
+            "newTab":true,
             "url": "#"
           }
         },
@@ -51,8 +52,9 @@
             "attachment": "scroll"
           },
           "button": {
-            "isButton":false,
+            "isButton": false,
             "label": "visit",
+            "newTab":true,
             "url": "#"
           }
         },
@@ -73,8 +75,9 @@
             "attachment": "scroll"
           },
           "button": {
-            "isButton":false,
+            "isButton": false,
             "label": "visit",
+            "newTab":true,
             "url": "#"
           }
         }
@@ -85,8 +88,7 @@
       "default": {
         "header": {
           "color": "#fff",
-          "typo":{
-        
+          "typo": {
             "fontCategory": "",
             "fontFamily": "",
             "fontSize": {
@@ -104,8 +106,7 @@
         },
         "description": {
           "color": "#fff",
-          "typo":{
-        
+          "typo": {
             "fontCategory": "",
             "fontFamily": "",
             "fontSize": {
@@ -122,18 +123,18 @@
           }
         },
         "button": {
-          "colors":{
-              "color":"#fff",
-              "bg":"linear-gradient(120deg, #1d976c, #93f9b9)"
-            },
-            "border":{
-              "width": "1px",
-              "color": "#0000ff",
-              "style": "solid",
-              "radius":"8px"
-            }
+          "colors": {
+            "color": "#fff",
+            "bg": "linear-gradient(120deg, #1d976c, #93f9b9)"
+          },
+          "border": {
+            "width": "0px",
+            "color": "#0000ff",
+            "style": "solid",
+            "radius": "8px"
+          }
         },
-        "textAlign":"center"
+        "textAlign": "center"
       }
     },
     "layout": {
@@ -188,16 +189,16 @@
             "bottom": "0px"
           },
           "tablet": {
-            "top": "10px",
-            "left": "10px",
-            "right": "10px",
-            "bottom": "10px"
+            "top": "0px",
+            "left": "0px",
+            "right": "0px",
+            "bottom": "0px"
           },
           "mobile": {
-            "top": "10px",
-            "left": "10px",
-            "right": "10px",
-            "bottom": "10px"
+            "top": "0px",
+            "left": "0px",
+            "right": "0px",
+            "bottom": "0px"
           }
         },
         "shadow": []
@@ -221,24 +222,27 @@
         "keyboardControl": false,
         "mouseWheel": false,
         "scrollBar": true,
-        "textAnimation":"animate__fadeInBottomRight",
-        "animationDuration":"animate__fast",
+        "textAnimation": "animate__fadeInBottomRight",
+        "animationDuration": "animate__fast",
         "isAnimation": true,
         "grabCursor": false,
-        "pagination":{
-            "status":true,
-            "dynamicBullets":true,
-            "clickable":true,
-            "type":""
-
+        "pagination": {
+          "status": true,
+          "dynamicBullets": true,
+          "clickable": true,
+          "type": ""
         },
-        "slideEffects":"",
-        "slideDirection":"horizontal"
+        "slideEffects": "",
+        "slideDirection": "horizontal"
       }
     },
     "align": {
       "type": "string",
       "default": "wide"
+    },
+    "alignment": {
+      "type": "string",
+      "default": "center"
     }
   },
   "supports": {

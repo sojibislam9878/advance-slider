@@ -7,30 +7,29 @@ $primaryColor: #4527a4;
       // height: 400px;
       // border-radius: 20px;
       // margin-top: 150px;
-      
+
       .swiper-button-next,
       .swiper-button-prev {
         padding: 8px 12px;
         // position: absolute;
         // left: 50%;
         // transform: translateX(-50%);
-		// display: flex;
-		// justify-content: space-between;
+        // display: flex;
+        // justify-content: space-between;
       }
-      
+
       .swiper-button-prev {
         // top: 20px; // Adjust as needed
         // transform: translateX(-50%) scaleX(-1) rotate(-90deg);
-        transform:scaleX(-1);
-		
+        transform: scaleX(-1);
       }
-      
-    //   .swiper-button-next {
-	// 	margin-top: 120px;
-    //     bottom: 0px; // Adjust as needed
-	// 	transform: translateX(-50%) rotate(90deg)
-    //   }
-      
+
+      //   .swiper-button-next {
+      // 	margin-top: 120px;
+      //     bottom: 0px; // Adjust as needed
+      // 	transform: translateX(-50%) rotate(90deg)
+      //   }
+
       .swiper-slide {
         text-align: center;
         font-size: 18px;
@@ -38,7 +37,7 @@ $primaryColor: #4527a4;
         justify-content: center;
         align-items: center;
       }
-      
+
       .swiper-slide img {
         display: block;
         width: 100%;

@@ -9,8 +9,9 @@
   font-weight: 700;
 }
 
-.wp-block-b-blocks-advance-slider .selectHelp {
-  color: #616063;
+.wp-block-b-blocks-advance-slider .bPlPanelBody .addItem:hover {
+  background-color: #4527a4;
+  color: white !important;
 }
 
 .btn {
@@ -54,9 +55,9 @@
 }
 
 .add {
-  border: 1px solid #006BA1;
+  border: 1px solid #006ba1;
   border-radius: 4px;
-  background-color: #006BA1;
+  background-color: #006ba1;
   color: rgba(255, 255, 255, 0.822);
   font-size: 14px;
   padding: 8px;

@@ -1,56 +1,109 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 import { __ } from "@wordpress/i18n";
 import { RichText } from "@wordpress/block-editor";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import 'animate.css';
-import { Navigation, Pagination, Scrollbar, Autoplay, Keyboard, Mousewheel,EffectFade,EffectFlip, EffectCreative, EffectCards } from "swiper/modules";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "animate.css";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  Autoplay,
+  Keyboard,
+  Mousewheel,
+  EffectFade,
+  EffectFlip,
+  EffectCreative,
+  EffectCards,
+} from "swiper/modules";
 import { updateData } from "../../utils/functions";
 import "swiper/css/effect-fade";
-import 'swiper/css/effect-flip';
-import 'swiper/css/effect-cards';
+import "swiper/css/effect-flip";
+import "swiper/css/effect-cards";
 
 const Slider = ({ attributes, setAttributes, from }) => {
   const { sliders, options } = attributes || [];
-  const { autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel, textAnimation, animationDuration, isAnimation, pagination, slideEffects, slideDirection, grabCursor } = options || {};
-  const { status: pageStatus, clickable, dynamicBullets, type } = pagination || {}
+  const {
+    autoPlay,
+    navigationBtn,
+    loop,
+    scrollBar,
+    simulateTouch,
+    keyboardControl,
+    mouseWheel,
+    textAnimation,
+    animationDuration,
+    isAnimation,
+    pagination,
+    slideEffects,
+    slideDirection,
+    grabCursor,
+  } = options || {};
+  const {
+    status: pageStatus,
+    clickable,
+    dynamicBullets,
+    type,
+  } = pagination || {};
   const { isAutoPlay, delay, disableOnInteraction } = autoPlay;
   const { status, icon } = navigationBtn;
   const swiperRef = useRef(null);
-  
+
   const autoPlayConfig = isAutoPlay ? { delay, disableOnInteraction } : "";
-  const paginationConfig = pageStatus 
-  ? type 
-    ? { clickable, dynamicBullets, type } 
-    : { clickable, dynamicBullets } 
-  : "";
+  const paginationConfig = pageStatus
+    ? type
+      ? { clickable, dynamicBullets, type }
+      : { clickable, dynamicBullets }
+    : "";
   useEffect(() => {
     if (!isAnimation) {
-      
-      return
-      
+      return;
     } else if (swiperRef.current) {
       const swiperInstance = swiperRef.current.swiper;
 
-      swiperInstance.on('slideChange', () => {
+      swiperInstance.on("slideChange", () => {
         const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
-        const animatedElements = activeSlide.querySelectorAll('.AE');
+        const animatedElements = activeSlide.querySelectorAll(".AE");
 
         animatedElements.forEach((element) => {
-          // Add animation classes
-          element.classList.add('animate__animated', textAnimation, animationDuration);
+          element.classList.add(
+            "animate__animated",
+            textAnimation,
+            animationDuration
+          );
 
-          // Remove the animation classes after the animation completes
           setTimeout(() => {
-            element.classList.remove('animate__animated', textAnimation, animationDuration);
-          }, 2000); // Adjust the timeout to match the duration of your animation
+            element.classList.remove(
+              "animate__animated",
+              textAnimation,
+              animationDuration
+            );
+          }, 3000);
         });
       });
     }
-  }, [textAnimation, autoPlay, navigationBtn, loop, scrollBar, simulateTouch, keyboardControl, mouseWheel,animationDuration,isAnimation, pageStatus, clickable, dynamicBullets, type, slideEffects, slideDirection,grabCursor]);
+  }, [
+    textAnimation,
+    autoPlay,
+    navigationBtn,
+    loop,
+    scrollBar,
+    simulateTouch,
+    keyboardControl,
+    mouseWheel,
+    animationDuration,
+    isAnimation,
+    pageStatus,
+    clickable,
+    dynamicBullets,
+    type,
+    slideEffects,
+    slideDirection,
+    grabCursor,
+  ]);
 
   return (
     <div className="slider">
@@ -58,14 +111,11 @@ const Slider = ({ attributes, setAttributes, from }) => {
         ref={swiperRef}
         onSwiper={(swiper) => {
           if (icon) {
-            // Update previous button
             const prevBtn = swiper.navigation.prevEl;
             if (prevBtn) {
               prevBtn.innerHTML = icon;
               prevBtn.classList.add("custom-swiper-btn");
             }
-
-            // Update next button
             const nextBtn = swiper.navigation.nextEl;
             if (nextBtn) {
               nextBtn.innerHTML = icon;
@@ -81,7 +131,7 @@ const Slider = ({ attributes, setAttributes, from }) => {
             translate: [0, 0, -400],
           },
           next: {
-            translate: ['100%', 0, 0],
+            translate: ["100%", 0, 0],
           },
         }}
         autoplay={autoPlayConfig}
@@ -95,14 +145,28 @@ const Slider = ({ attributes, setAttributes, from }) => {
         direction={`${slideDirection}`}
         keyboard={{ enabled: keyboardControl }}
         mousewheel={mouseWheel}
-        modules={[Navigation, Pagination, Scrollbar, Autoplay, Keyboard, Mousewheel, EffectFade,EffectFlip, EffectCreative, EffectCards]}
+        modules={[
+          Navigation,
+          Pagination,
+          Scrollbar,
+          Autoplay,
+          Keyboard,
+          Mousewheel,
+          EffectFade,
+          EffectFlip,
+          EffectCreative,
+          EffectCards,
+        ]}
         className="mySwiper"
       >
         {sliders?.map((slider, index) => {
           const { heading, description, button } = slider;
 
           return (
-            <SwiperSlide className={`swiper-slide swiper-slide-${index}`} key={index}>
+            <SwiperSlide
+              className={`swiper-slide swiper-slide-${index}`}
+              key={index}
+            >
               <div className="content">
                 {from === "server" ? (
                   <>
@@ -111,14 +175,27 @@ const Slider = ({ attributes, setAttributes, from }) => {
                       tagName="h1"
                       placeholder={__("Header...")}
                       value={heading}
-                      onChange={(value) => setAttributes({ sliders: updateData(sliders, value, index, "heading") })}
+                      onChange={(value) =>
+                        setAttributes({
+                          sliders: updateData(sliders, value, index, "heading"),
+                        })
+                      }
                     />
                     <RichText
                       className="description AE"
                       tagName="p"
                       placeholder={__("Description...")}
                       value={description}
-                      onChange={(value) => setAttributes({ sliders: updateData(sliders, value, index, "description") })}
+                      onChange={(value) =>
+                        setAttributes({
+                          sliders: updateData(
+                            sliders,
+                            value,
+                            index,
+                            "description"
+                          ),
+                        })
+                      }
                     />
                   </>
                 ) : (
@@ -127,9 +204,15 @@ const Slider = ({ attributes, setAttributes, from }) => {
                     <p className="description AE">{description}</p>
                   </>
                 )}
-                <a href={button.url} target="_blank" rel="noreferrer">
-                  {button.isButton && <button className="button AE">{button.label}</button>}
-                </a>
+                  <a
+                    href={button.url}
+                    target={button.newTab ? "_blank" : "_self"}
+                    rel="noreferrer"
+                  >
+                    {button.isButton && (
+                      <button className="linkBtn AE">{button.label}</button>
+                    )}
+                  </a>
               </div>
             </SwiperSlide>
           );

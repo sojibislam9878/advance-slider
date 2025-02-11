@@ -28,6 +28,8 @@ const Items = ({
 
   // 	setAttributes({ [arrKey]: newItems });
   // 	setActiveIndex && setActiveIndex(index);
+
+  
   // }
 
   return (
@@ -41,8 +43,8 @@ const Items = ({
         }}
       />
       <InputControl
-      label={__("Header", "b-blocks")}
-      placeholder={__("Header...", "b-blocks")}
+        label={__("Header", "b-blocks")}
+        placeholder={__("Header...", "b-blocks")}
         value={sliders[index]?.heading}
         //   onChange={v => updateSlides("heading",v)}
         onChange={(value) =>
@@ -105,6 +107,23 @@ const Items = ({
               });
             }}
           />
+          <Flex justify="start" align="center" gap={2}>
+          <FormToggle
+            checked={sliders[index]?.button?.newTab}
+            onChange={() =>
+              setAttributes({
+                sliders: updateData(
+                  sliders,
+                  !sliders[index]?.button?.newTab, // Toggle the value
+                  index, // Ensure index is passed
+                  "button",
+                  "newTab"
+                ),
+              })
+            }
+          />
+            <p className="mt10">Link open in new tab</p>
+          </Flex>
         </>
       )}
     </div>

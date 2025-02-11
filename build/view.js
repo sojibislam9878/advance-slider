@@ -102,17 +102,14 @@ const Slider = ({
       return;
     } else if (swiperRef.current) {
       const swiperInstance = swiperRef.current.swiper;
-      swiperInstance.on('slideChange', () => {
+      swiperInstance.on("slideChange", () => {
         const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
-        const animatedElements = activeSlide.querySelectorAll('.AE');
+        const animatedElements = activeSlide.querySelectorAll(".AE");
         animatedElements.forEach(element => {
-          // Add animation classes
-          element.classList.add('animate__animated', textAnimation, animationDuration);
-
-          // Remove the animation classes after the animation completes
+          element.classList.add("animate__animated", textAnimation, animationDuration);
           setTimeout(() => {
-            element.classList.remove('animate__animated', textAnimation, animationDuration);
-          }, 2000); // Adjust the timeout to match the duration of your animation
+            element.classList.remove("animate__animated", textAnimation, animationDuration);
+          }, 3000);
         });
       });
     }
@@ -123,14 +120,11 @@ const Slider = ({
     ref: swiperRef,
     onSwiper: swiper => {
       if (icon) {
-        // Update previous button
         const prevBtn = swiper.navigation.prevEl;
         if (prevBtn) {
           prevBtn.innerHTML = icon;
           prevBtn.classList.add("custom-swiper-btn");
         }
-
-        // Update next button
         const nextBtn = swiper.navigation.nextEl;
         if (nextBtn) {
           nextBtn.innerHTML = icon;
@@ -146,7 +140,7 @@ const Slider = ({
         translate: [0, 0, -400]
       },
       next: {
-        translate: ['100%', 0, 0]
+        translate: ["100%", 0, 0]
       }
     },
     autoplay: autoPlayConfig,
@@ -198,10 +192,10 @@ const Slider = ({
       className: "description AE"
     }, description)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: button.url,
-      target: "_blank",
+      target: button.newTab ? "_blank" : "_self",
       rel: "noreferrer"
     }, button.isButton && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      className: "button AE"
+      className: "linkBtn AE"
     }, button.label))));
   })));
 };
@@ -252,7 +246,7 @@ const Style = ({
   const headerSl = `${slideSl} .header`;
   const descriptionSl = `${slideSl} .description`;
   const contentSl = `${slideSl} .content`;
-  const buttonSl = `${contentSl} .button`;
+  const buttonSl = `${contentSl} .linkBtn`;
   const slidesBg = sliders?.map((slider, index) => {
     const {
       background
@@ -291,8 +285,8 @@ const Style = ({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("style", {
     dangerouslySetInnerHTML: {
       __html: `
-        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)('', header.typo)?.googleFontLink}
-        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)('', description.typo)?.googleFontLink}
+        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)("", header.typo)?.googleFontLink}
+        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)("", description.typo)?.googleFontLink}
         ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)(headerSl, header.typo)?.styles}
         ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)(descriptionSl, description.typo)?.styles}
 		
@@ -330,7 +324,7 @@ const Style = ({
 
     ${buttonSl} {
       ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getColorsCSS)(colors)}
-      border: ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getBorderCSS)(border)};
+      border: none;
       border-radius: ${border.radius};
       padding: 12px 20px;
       font-size: 16px;
@@ -343,11 +337,6 @@ const Style = ({
           opacity: 0.9;
           transform: translateY(-2px);
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-      }
-  
-      &:active {
-          transform: translateY(0);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
   }
     @media  (min-width:641px) and (max-width: 1024px){

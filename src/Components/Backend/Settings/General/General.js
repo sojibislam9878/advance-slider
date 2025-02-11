@@ -2,8 +2,6 @@ import { __ } from "@wordpress/i18n";
 
 import {
   PanelBody,
-  // SelectControl,
-  // __experimentalInputControl as InputControl,
   __experimentalUnitControl as UnitControl,
   // TextareaControl,
   Flex,
@@ -14,11 +12,8 @@ import {
   __experimentalNumberControl as NumberControl,
   SelectControl,
 } from "@wordpress/components";
-// import { purposeTypeOptions } from '../../../../utils/options';
-// import { updateData } from '../../../../utils/functions';
 import {
   BButtonGroup,
-  // Background,
   BoxControl,
   ColorControl,
   Device,
@@ -27,9 +22,7 @@ import {
   Label,
   ShadowControl,
 } from "../../../../../../bpl-tools/Components";
-// import Sortable from "../../../../../../bpl-tools/Components/ItemsPanel/Sortable";
 import { updateData } from "../../../../utils/functions";
-// import { deleteIcon, duplicateIcon } from "../../../../utils/icons";
 import {
   animationDurationOptions,
   animationType,
@@ -37,6 +30,7 @@ import {
   slideEffectsOptions,
 } from "../../../../utils/options";
 import Items from "../../Panel/Items";
+import { emUnit, pxUnit, remUnit, vwUnit } from "../../../../../../bpl-tools/utils/options";
 
 const General = ({ attributes, setAttributes, device }) => {
   const { layout, options } = attributes;
@@ -45,7 +39,6 @@ const General = ({ attributes, setAttributes, device }) => {
     autoPlay,
     navigationBtn,
     loop,
-    // scrollBar,
     simulateTouch,
     keyboardControl,
     mouseWheel,
@@ -59,80 +52,41 @@ const General = ({ attributes, setAttributes, device }) => {
   } = options || {};
 
   console.log(isAnimation);
-
-  // const handleAdd = () => {
-  //   const defaultSlide = {
-  //     heading: "Hello World",
-  //     description:
-  //       "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
-  //     background: {
-  //       color: "rgba(0, 0, 255, 1)",
-  //       gradient: "linear-gradient(135deg, #4527a4, #8344c5)",
-  //       image: {
-  //         url: "https://i.ibb.co.com/4fck8Cv/8.jpg",
-  //       },
-  //       type: "solid",
-  //       repeat: "no-repeat",
-  //       size: "cover",
-  //       position: "center",
-  //       attachment: "scroll",
-  //     },
-  //     button: {
-  //       label: "visit",
-  //       url: "#",
-  //     },
-  //     overlay: "",
-  //   };
-  //   const newSildes = [...sliders, defaultSlide];
-  //   setAttributes({ sliders: newSildes });
-  // };
-
-  // const handleDuplicate = (index) => {
-  //   const slideToDuplicate = { ...sliders[index] };
-  //   const updatedSlides = [...sliders];
-  //   updatedSlides.splice(index + 1, 0, slideToDuplicate);
-  //   setAttributes({ sliders: updatedSlides });
-  // };
-
-  // const handleDelete = (index) => {
-  //   const updatedSliders = sliders.filter((_, indx) => indx !== index);
-  //   setAttributes({ sliders: updatedSliders });
-  // };
-
   return (
     <>
       {/* Layout Setting Section */}
       <PanelBody className="bPlPanelBody" title={__("Slides", "b-blocks")}>
-      <ItemsPanel
-        {...{attributes, setAttributes}}
-        arrKey="sliders"
-        newItem={ {
-          "heading": "new slider",
-          "description": "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
-          "background": {
-            "color": "rgba(0, 0, 255, 1)",
-            "gradient": "linear-gradient(135deg, #4527a4, #8344c5)",
-            "image": {
-              "url": "https://i.ibb.co.com/0jDXVmFJ/23227107-f847-4a25-ac32-74562e88cf0f.jpg"
+        <ItemsPanel
+          {...{ attributes, setAttributes }}
+          arrKey="sliders"
+          newItem={{
+            heading: "new slider",
+            description:
+              "Holisticly reconceptualize long-term high-impact technologies after reliable information. Synergistically reintermediate.",
+            background: {
+              color: "rgba(0, 0, 255, 1)",
+              gradient: "linear-gradient(135deg, #4527a4, #8344c5)",
+              image: {
+                url: "https://i.ibb.co.com/0jDXVmFJ/23227107-f847-4a25-ac32-74562e88cf0f.jpg",
+              },
+              type: "image",
+              repeat: "no-repeat",
+              size: "cover",
+              position: "center",
+              overlayColor: "#00000061",
+              attachment: "scroll",
             },
-            "type": "image",
-            "repeat": "no-repeat",
-            "size": "cover",
-            "position": "center",
-            "overlayColor": "#00000061",
-            "attachment": "scroll"
-          },
-          "button": {
-            "isButton":false,
-            "label": "visit",
-            "url": "#"
-          }
-        }}
-        ItemSettings={Items}
-        itemLabel="Slide"
-        design="sortable" 
-      />
-    </PanelBody>
+            button: {
+              isButton: false,
+              label: "visit",
+              url: "#",
+            },
+          }}
+          ItemSettings={Items}
+          itemLabel="Slide"
+          design="sortable"
+        />
+      </PanelBody>
 
       <PanelBody
         className="bPlPanelBody"
@@ -145,6 +99,7 @@ const General = ({ attributes, setAttributes, device }) => {
         </PanelRow>
         <UnitControl
           value={layout.height[device]}
+          units={[pxUnit(), emUnit(), remUnit(),vwUnit()]}
           onChange={(value) =>
             setAttributes({
               layout: updateData(layout, value, "height", device),
@@ -168,8 +123,6 @@ const General = ({ attributes, setAttributes, device }) => {
           <Device />
         </PanelRow>
         <BoxControl
-          // className="mt5"
-          // label={__("Padding", "b-blocks")}
           values={layout.padding[device]}
           onChange={(value) =>
             setAttributes({
@@ -182,8 +135,6 @@ const General = ({ attributes, setAttributes, device }) => {
           <Device />
         </PanelRow>
         <BoxControl
-          // className="mt5"
-          // label={__("Margin", "b-blocks")}
           values={layout.margin[device]}
           onChange={(value) =>
             setAttributes({
@@ -219,128 +170,6 @@ const General = ({ attributes, setAttributes, device }) => {
 
       {/* Slides Section */}
 
-      {/* <PanelBody
-        className="bPlPanelBody"
-        title={__("Slides", "b-blocks")}
-        initialOpen={false}
-      >
-        {sliders?.map((slider, index) => {
-          const { background, heading, description, button = {} } = slider;
-
-          return (
-            <PanelBody
-              key={index}
-              title={__(`slide ${index + 1}`, "b-blocks")}
-              initialOpen={false}
-            >
-              <InputControl
-                label={__("Heading", "b-blocks")}
-                value={heading}
-                onChange={(value) =>
-                  setAttributes({
-                    sliders: updateData(sliders, value, index, "heading"),
-                  })
-                }
-              />
-
-              <TextareaControl
-                className="mt5"
-                label={__("Description", "b-blocks")}
-                value={description}
-                onChange={(value) =>
-                  setAttributes({
-                    sliders: updateData(sliders, value, index, "description"),
-                  })
-                }
-              />
-              <Background
-                value={background}
-                onChange={(value) => {
-                  setAttributes({
-                    sliders: updateData(sliders, value, index, "background"),
-                  });
-                }}
-              />
-              <Flex justify="start" align="center" gap={2}>
-                <FormToggle
-                  checked={button?.isButton}
-                  onChange={
-                    () =>
-                      setAttributes({
-                        sliders: updateData(
-                          sliders,
-                          !button.isButton,
-                          index,
-                          "button",
-                          "isButton"
-                        ),
-                      })
-                    // console.log(button.isBtn)
-                  }
-                />
-                <p className="mt10">Show Button</p>
-              </Flex>
-
-              {button.isButton && (
-                <>
-                  <InputControl
-                    className="mt5"
-                    label={__("Button Label", "b-blocks")}
-                    value={button.label}
-                    onChange={(value) => {
-                      setAttributes({
-                        sliders: updateData(
-                          sliders,
-                          value,
-                          index,
-                          "button",
-                          "label"
-                        ),
-                      });
-                    }}
-                  />
-                  <InputControl
-                    className="mt5"
-                    label={__("Button URL", "b-blocks")}
-                    value={button.url}
-                    onChange={(value) => {
-                      setAttributes({
-                        sliders: updateData(
-                          sliders,
-                          value,
-                          index,
-                          "button",
-                          "url"
-                        ),
-                      });
-                    }}
-                  />
-                </>
-              )}
-              <Flex>
-                <button
-                  className="btn duplicate"
-                  onClick={() => handleDuplicate(index)}
-                >
-                  {duplicateIcon} Duplicate
-                </button>
-                <button
-                  onClick={() => {
-                    handleDelete(index);
-                  }}
-                  className="btn delete"
-                >
-                  {deleteIcon} Delete
-                </button>
-              </Flex>
-            </PanelBody>
-          );
-        })}
-        <button onClick={handleAdd} className="btn add">
-          Add
-        </button>
-      </PanelBody> */}
-
       {/* Option section  */}
 
       <PanelBody
@@ -348,18 +177,19 @@ const General = ({ attributes, setAttributes, device }) => {
         title={__("Slide Options", "b-blocks")}
         initialOpen={false}
       >
-        
         <BButtonGroup
-        options={[
-          { label: "Horizontal", value: "horizontal" },
-          { label: "Vertical", value: "vertical" }
-        ]}
-        value={slideDirection}
-        onChange={(value) => {
-          setAttributes({ options:updateData(options, value, "slideDirection") });
-        }}
-        label="Slide Direction"
-      />
+          options={[
+            { label: "Horizontal", value: "horizontal" },
+            { label: "Vertical", value: "vertical" },
+          ]}
+          value={slideDirection}
+          onChange={(value) => {
+            setAttributes({
+              options: updateData(options, value, "slideDirection"),
+            });
+          }}
+          label="Slide Direction"
+        />
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={navigationBtn.status}
@@ -379,7 +209,7 @@ const General = ({ attributes, setAttributes, device }) => {
         {navigationBtn.status && (
           <>
             <IconLibrary
-              label={__("Select an icon", "b-blocks")}
+              label={__("Select navigation icon", "b-blocks")}
               onChange={(value) => {
                 setAttributes({
                   options: updateData(options, value, "navigationBtn", "icon"),
@@ -460,17 +290,6 @@ const General = ({ attributes, setAttributes, device }) => {
             <p className="mt10">Slide Loop</p>
           </Flex>
         )}
-        {/* <Flex justify="start" align="center" gap={2}>
-          <FormToggle
-            checked={scrollBar}
-            onChange={() =>
-              setAttributes({
-                options: updateData(options, !scrollBar, "scrollBar"),
-              })
-            }
-          />
-          <p className="mt10">Hide Scrollbar</p>
-        </Flex> */}
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={simulateTouch}
@@ -483,20 +302,20 @@ const General = ({ attributes, setAttributes, device }) => {
           />
           <p className="mt10">Simulate on touch</p>
         </Flex>
-        {
-          simulateTouch && <Flex justify="start" align="center" gap={2}>
-          <FormToggle
-            checked={grabCursor}
-            help
-            onChange={() =>
-              setAttributes({
-                options: updateData(options, !grabCursor, "grabCursor"),
-              })
-            }
-          />
-          <p className="mt10">Grab Curson</p>
-        </Flex>
-        }
+        {simulateTouch && (
+          <Flex justify="start" align="center" gap={2}>
+            <FormToggle
+              checked={grabCursor}
+              help
+              onChange={() =>
+                setAttributes({
+                  options: updateData(options, !grabCursor, "grabCursor"),
+                })
+              }
+            />
+            <p className="mt10">Grab Curson</p>
+          </Flex>
+        )}
         <small>Maybe Simulate touch not work properly on backend</small>
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
@@ -558,7 +377,7 @@ const General = ({ attributes, setAttributes, device }) => {
                   })
                 }
               />
-              <p className="mt10">Dynamic Bullets</p>
+              <p className="mt10">Dynamic Bullets Pagination</p>
             </Flex>
             <Flex justify="start" align="center" gap={2}>
               <FormToggle
@@ -574,7 +393,7 @@ const General = ({ attributes, setAttributes, device }) => {
                   })
                 }
               />
-              <p className="mt10">Clickable</p>
+              <p className="mt10">Clickable Pagination</p>
             </Flex>
             <SelectControl
               label={__("Pagination Type", "b-blocks")}

@@ -1,79 +1,83 @@
 $primaryColor: #4527a4;
 
 .bBlocksInspectorInfo {
-	padding: 6px;
+  padding: 6px;
 
-	a {
-		text-decoration: none;
-		font-weight: 700;
-	}
-}
-
-.wp-block-b-blocks-advance-slider{
-	.selectHelp{
-		color: #616063;
-	}
+  a {
+    text-decoration: none;
+    font-weight: 700;
+  }
 }
 
-.btn{
-	margin-top: 6px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 4px 4px;
+.wp-block-b-blocks-advance-slider {
+ 
+  .bPlPanelBody {
+    .addItem:hover {
+      background-color: #4527a4;
+      color: white !important;
+    }
+  }
 }
 
-.delete{
-	border: 1px solid red;
-	border-radius: 4px;
-	background-color:white;
-	color: red;
-	transition-duration: 500ms;
-	width: 100%;
+.btn {
+  margin-top: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 4px;
 }
 
-.delete:hover{
-	color:white;
-	background-color: red;
-	transition-duration: 500ms;
-	cursor: pointer;
-}
-.duplicate{
-	border: 1px solid rgb(34, 104, 255);
-	border-radius: 4px;
-	background-color:white;
-	color: rgb(34, 104, 255);
-	transition-duration: 500ms;
-	width: 100%;
+.delete {
+  border: 1px solid red;
+  border-radius: 4px;
+  background-color: white;
+  color: red;
+  transition-duration: 500ms;
+  width: 100%;
 }
 
-.duplicate:hover{
-	color:white;
-	background-color: rgb(34, 104, 255);
-	transition-duration: 500ms;
-	cursor: pointer;
+.delete:hover {
+  color: white;
+  background-color: red;
+  transition-duration: 500ms;
+  cursor: pointer;
 }
-.add{
-	border: 1px solid #006BA1;
-	border-radius: 4px;
-	background-color:#006BA1;
-	color: rgba(255, 255, 255, 0.822);
-	font-size: 14px;
-	padding: 8px;
-	transition-duration: 500ms;
-	width: 100%;
-	align-items: center;
-	text-align: center;
-	margin: 6px;
+.duplicate {
+  border: 1px solid rgb(34, 104, 255);
+  border-radius: 4px;
+  background-color: white;
+  color: rgb(34, 104, 255);
+  transition-duration: 500ms;
+  width: 100%;
 }
 
-.add:hover{
-	color:white;
-	background-color: #04547c;
-	transition-duration: 500ms;
-	cursor: pointer;
+.duplicate:hover {
+  color: white;
+  background-color: rgb(34, 104, 255);
+  transition-duration: 500ms;
+  cursor: pointer;
+}
+.add {
+  border: 1px solid #006ba1;
+  border-radius: 4px;
+  background-color: #006ba1;
+  color: rgba(255, 255, 255, 0.822);
+  font-size: 14px;
+  padding: 8px;
+  transition-duration: 500ms;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  margin: 6px;
 }
 
-.components-grid{
-	margin-top: 10px;
+.add:hover {
+  color: white;
+  background-color: #04547c;
+  transition-duration: 500ms;
+  cursor: pointer;
+}
+
+.components-grid {
+  margin-top: 10px;
 }
