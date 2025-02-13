@@ -112,6 +112,9 @@ const General = ({ attributes, setAttributes, device }) => {
         </PanelRow>
         <UnitControl
           value={layout.width[device]}
+          max={100}
+          step={1}
+          min={1}
           onChange={(value) =>
             setAttributes({
               layout: updateData(layout, value, "width", device),
@@ -293,7 +296,6 @@ const General = ({ attributes, setAttributes, device }) => {
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={simulateTouch}
-            help
             onChange={() =>
               setAttributes({
                 options: updateData(options, !simulateTouch, "simulateTouch"),
@@ -306,7 +308,6 @@ const General = ({ attributes, setAttributes, device }) => {
           <Flex justify="start" align="center" gap={2}>
             <FormToggle
               checked={grabCursor}
-              help
               onChange={() =>
                 setAttributes({
                   options: updateData(options, !grabCursor, "grabCursor"),
@@ -320,7 +321,6 @@ const General = ({ attributes, setAttributes, device }) => {
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={keyboardControl}
-            help
             onChange={() =>
               setAttributes({
                 options: updateData(
@@ -336,7 +336,6 @@ const General = ({ attributes, setAttributes, device }) => {
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={mouseWheel}
-            help
             onChange={() =>
               setAttributes({
                 options: updateData(options, !mouseWheel, "mouseWheel"),
@@ -427,7 +426,6 @@ const General = ({ attributes, setAttributes, device }) => {
         <Flex justify="start" align="center" gap={2}>
           <FormToggle
             checked={isAnimation}
-            help
             onChange={() =>
               setAttributes({
                 options: updateData(options, !isAnimation, "isAnimation"),

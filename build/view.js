@@ -286,7 +286,7 @@ const Style = ({
     dangerouslySetInnerHTML: {
       __html: `
         ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)("", header.typo)?.googleFontLink}
-        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)("", description.typo)?.googleFontLink}
+        ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)("", description.typo)?.googleFontLink}   
         ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)(headerSl, header.typo)?.styles}
         ${(0,_bpl_tools_utils_getCSS__WEBPACK_IMPORTED_MODULE_1__.getTypoCSS)(descriptionSl, description.typo)?.styles}
 		
